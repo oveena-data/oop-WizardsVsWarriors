@@ -11,7 +11,7 @@ Barbarian::Barbarian(){
 
 Barbarian::Barbarian(string name){
     this->name = name;
-    this->AC = 15;
+    this->AC = 13;
     this->health = 70;
     this->base_damage = 7;
     this->speed = 4;
@@ -34,6 +34,7 @@ void Barbarian::ability1(Player* opponent, int cost){
         cout << this->name << " jabs " << opponent->get_name() << " with a poisoned blade for " << (poison_damage+base_damage) << " damage!" << endl;
     } else {
         cout << this->name << "'s "<< this->get_ability1() << " missed its target!" << endl;
+        this->set_stamina((stamina - cost));
     }
 }
 

@@ -22,6 +22,10 @@ class Hulk : public Warrior {
     Hulk();
     Hulk(string name);
 
+    Hulk newHulk(){
+        return Hulk(this->name);
+    }
+
     // void Hulk_Smash(Player* Opponent);
     void ability1 (Player* opponent, int cost);
 

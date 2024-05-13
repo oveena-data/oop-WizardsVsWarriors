@@ -16,10 +16,13 @@ class Warrior : public Player {
     Warrior(); //default constructor
     Warrior(string subclass);
 
+    virtual void ability1 (Player* opponent, int cost) = 0;
+
     void set_subclass(string subclass);
     void set_stamina(int s);
 
     int get_stamina();
+    string stamina_or_mana();
     string get_subclass();
 
 };

@@ -29,4 +29,7 @@ string Warrior::get_subclass(){
 int Warrior::get_stamina(){
     return stamina;
 }
+string stamina_or_mana(){
+    return "stamina";
+}
 

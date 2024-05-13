@@ -11,7 +11,7 @@ Hulk::Hulk(){
 
 Hulk::Hulk(string name){
     this->name = name;
-    this->AC = 12;
+    this->AC = 11;
     this->health = 100;
     this->base_damage = 10;
     this->speed = 2;
@@ -27,7 +27,7 @@ Hulk::Hulk(string name){
     this->smash_damage = 25;
 }
 
-void Hulk::ability1 (Player* opponent, int cost){
+void Hulk::ability1 (Player* opponent, int cost) {
     if (does_it_hit(opponent) == true){
         opponent->take_damage(smash_damage);
         opponent->is_stunned(1); //sets stunned boolean to true
@@ -35,5 +35,6 @@ void Hulk::ability1 (Player* opponent, int cost){
         cout << this->name << " smashes down on " << opponent->get_name() << " for " << smash_damage << " damage!" << endl;
     } else {
         cout << this->name << " hulk smash missed its target!" << endl;
+        this->set_stamina((stamina - cost));
     }
 }
