@@ -22,9 +22,8 @@ class Hulk : public Warrior {
     Hulk();
     Hulk(string name);
 
-    void Hulk_Smash(Player* Opponent);
-
-    //void HULK_SMASH(Player* Opponent, int smash_damage);
+    // void Hulk_Smash(Player* Opponent);
+    void ability1 (Player* opponent, int cost);
 
 
 

@@ -15,6 +15,10 @@ class Player {
     int speed; //speed that determines who starts the fight
     int chance_to_hit; //number that effects how likely an attack is to hit the opponent (dice_roll + chance_to_hit)
 
+    string ability_name1;
+    string ability_name2;
+    int ability_cost;
+
     public:
     Player(); //default constructor sets all values to 0, name to "unnamed"
     Player(string name); //constructor that takes a name, sets all other values to 0
@@ -24,7 +28,10 @@ class Player {
 
     bool does_it_hit(Player* opponent); //does the attack hit the player/opponent?
 
-    void basic_attack(Player* opponent, int base_damage); //basic weapon attack, costs no mana/stamina
+    void basic_attack(Player* opponent); //basic weapon attack, costs no mana/stamina
+    // virtual void ability1(Player* opponent, string name, int damage, int cost) = 0;
+    // virtual void ability2(Player* opponent, string name, int damage, int cost) = 0;
+
     void take_damage(int damage_total); //reduces player/opponent health by given amount
     int dice_roll(); //returns a random number from 1-20
 
@@ -39,10 +46,15 @@ class Player {
 
     //GETTERS
     string get_name();
+    string get_ability1();
+    string get_ability2();
     int get_health();
+    int get_abilityCost();
+
     //SETTERS
     void set_health(int health);
     void set_name(string name);
+    void set_abilityCost (int cost);
 
 };
 

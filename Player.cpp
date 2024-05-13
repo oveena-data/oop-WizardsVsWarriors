@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <string>
+#include <unistd.h>
 using namespace std;
 
 Player::Player(){
@@ -27,7 +28,8 @@ int Player::dice_roll(){
     srand(time(0));  
     //cout << "Random number between 1 and 20 is: " <<endl;   
     int roll = (rand() % 20) + 1;
-    cout << roll << endl;
+    cout << "Dice roll: " << roll << endl;
+    sleep(1);
     return roll;  //returns rand number between 1-20
 }
 
@@ -39,10 +41,10 @@ bool Player::does_it_hit(Player* opponent){
     }
 }
 
-void Player::basic_attack(Player* opponent, int base_damage){
+void Player::basic_attack(Player* opponent){
     if (does_it_hit(opponent) == true){
         opponent->take_damage(base_damage);
-        cout << this->name << " hits " << opponent->get_name() << " with a basic attack!" << endl;
+        cout << this->name << " hits " << opponent->get_name() << " with a basic attack for " << this->base_damage << " damage!" << endl;
     } else {
         cout << this->name << " missed!" << endl;
     }
@@ -100,10 +102,23 @@ void Player::set_health(int h){
 void Player::set_name(string n){
     this->name = n;
 }
+void Player::set_abilityCost(int cost){
+    this->ability_cost = cost;
+}
+
 //GETTERS
 int Player::get_health(){
     return health;
 }
 string Player::get_name(){
     return name;
+}
+string Player::get_ability1(){
+    return ability_name1;
+}
+string Player::get_ability2(){
+    return ability_name2;
+}
+int Player::get_abilityCost(){
+    return ability_cost;
 }
