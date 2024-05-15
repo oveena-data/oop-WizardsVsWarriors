@@ -1,7 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Ability.h"
 #include <string>
 #include <iostream>
 using namespace std;
