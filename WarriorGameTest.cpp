@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Warrior.h"
+#include "Wizard.h"
+#include "FireWizard.h"
 #include "Hulk.h"
 #include "Barbarian.h"
 #include "Valkyrie.h"
@@ -14,120 +16,337 @@ int main(){
     int input_subclass;
     string player_name;
 
+    //Player *player = NULL;
+
     cout << "Do you want to be a Warrior or a Wizard?" << endl;
     cout << "{1: Warrior} {2: Wizard}"<< endl;
     cin >> input_class;
 
-    // Player *player;
-    // player = new Player;
+    if (input_class == 1){
+        Warrior *player = NULL;
+        cout << "Please select a Warrior class: " << endl;
+        cout << "{1: Hulk} {2: Barbarian} {3: Valkyrie}" << endl;
+        cout << endl;
+        cin >> input_subclass;
 
-    Warrior *player = NULL;
+        if (input_subclass == 1){
+            cout << "Please enter a name: ";
+            cin >> player_name;
+            player = new Hulk(player_name);
 
-    cout << "Please select a Warrior class: " << endl;
-    cout << "{1: Hulk} {2: Barbarian} {3: Valkyrie}" << endl;
-    cout << endl;
-    cin >> input_class;
+        } else if (input_subclass == 2){
+            cout << "Please enter a name: ";
+            cin >> player_name;
+            player = new Barbarian(player_name);
 
-    //Warrior *player = NULL;
+        } else if (input_subclass == 3){
+            cout << "Please enter a name: ";
+            cin >> player_name;
+            player = new Valkyrie(player_name);
 
-    if (input_subclass == 1){
-        cout << "Please enter a name: ";
-        cin >> player_name;
-        player = new Hulk(player_name);
+        } else {
+         cout << "Invalid input! Please enter a subclass." << endl;
+        }
 
-    } else if (input_subclass == 2){
-        cout << "Please enter a name: ";
-        cin >> player_name;
-        player = new Barbarian(player_name);
+        //Hulk player("Bertha");   FIX HARDCODED ENEMY
+        Barbarian opponent("Bo");
+        //initialise round 1
+        int round = 1;
 
-    } else if (input_subclass == 3){
-        cout << "Please enter a name: ";
-        cin >> player_name;
-        player = new Valkyrie(player_name);
+        //subclass testing
+        cout << "Subclass: " << player->get_subclass() << endl;
 
-    } else {
-        cout << "Invalid input! Please enter a subclass." << endl;
+        //while both players have health above 0
+        while(player->get_health() > 0 && opponent.get_health() > 0)
+        {   
+            cout << endl;
+            cout << "Round " << round << "!" << endl;
+            cout << "Player health: " << player->get_health() << " | Opponent health: " << opponent.get_health() << endl;
+            cout << "Player stamina: " << player->get_stamina() << endl;
+            cout << "Which action would you like to take?" << endl;
+            cout << endl;
+            cout << "{0: End Game Early} {1: Basic Attack} {2: " << player->get_ability1() << "}"<< endl;
+        
+            int attack_input;
+            cin >> attack_input;
+
+            //defensive programming to make sure input is as expected
+            if (attack_input == 1 || attack_input == 2 || attack_input == 3 || attack_input == 0){
+                switch (attack_input){
+                    case 0:
+                    cout << "Exiting game... " << endl;
+                    exit(0); //terminates the program
+ 
+                    case 1:
+                    player->basic_attack(&opponent);
+                    cout << endl;
+                    break;
+
+                    case 2:
+                    //warrior can only use special ability if they have enough stamina
+                    if (player->get_abilityCost() > player->get_stamina()){
+                        cout << "Not enough stamina! Resting..." << endl;
+                        cout << endl;
+                        player->set_stamina(player->get_stamina() + 25);
+                        break; //***at this point this code forfeits the player's turn, i'm not sure how to fix this yet.***
+                    } else {
+                        player->ability1(&opponent, player->get_abilityCost());
+                        cout << endl;
+                        break; 
+                    }  
+                } //switch statement end bracket
+
+                if(opponent.get_health() > 0){
+                    sleep(1); //pauses runtime for 1 second for new dice result (die result relies on time(0))
+
+                    //rolls a die to determine whether the opponent will use a basic attack or a special attack
+                    if (opponent.dice_roll() > 13 && (opponent.get_stamina() >= opponent.get_abilityCost())){
+                        cout << "Opponent uses an ability attack!" << endl;
+                        opponent.ability1(player, opponent.get_abilityCost());
+                    } else {
+                        opponent.basic_attack(player);
+                    }
+                }
+                if(player->get_health() <= 0){
+                    cout << opponent.get_name() << " wins!" << endl;
+                } else if (opponent.get_health() <= 0){
+                    cout << player->get_name() << " wins!" << endl;
+                }
+
+                //after each round, allow for stamina regeneration if an ability has not been used
+
+                round++; //aggregates round number
+
+                //clears status effects caused by ability attacks. Will edit status effects later.
+                player->clear_status_effects();
+                opponent.clear_status_effects();
+            
+            } else {
+                cout << "Invalid input! Please enter the number of the corresponding ability: ";
+                //break;
+
+            } //attack_input if-statment end bracket
+        } //While-loop end bracket
+
+        return 0;
+
+//WARRIOR CODE ^ ^ ^ 
+
+//WIZARD CODE \/  \/ \/
+
+
+    } else if (input_class == 2){
+        Wizard *player = NULL;
+        cout << "Please select a Wizard class: " << endl;
+        cout << "{1: FireWizard} {2: ...} {3: ...}" << endl;
+        cout << endl;
+        cin >> input_subclass;
+
+        if (input_subclass == 1){
+            cout << "Please enter a name: ";
+            cin >> player_name;
+            player = new FireWizard(player_name);
+
+        } else if (input_subclass == 2){
+            cout << "Please enter a name: ";
+            cin >> player_name;
+            //player = new Barbarian(player_name);
+
+        } else if (input_subclass == 3){
+            cout << "Please enter a name: ";
+            cin >> player_name;
+            //player = new Valkyrie(player_name);
+
+        } else {
+         cout << "Invalid input! Please enter a subclass." << endl;
+        }
+
+        //Hulk player("Bertha");
+        Barbarian opponent("Bo");
+        //initialise round 1
+        int round = 1;
+
+        //subclass testing
+        cout << "Subclass: " << player->get_subclass() << endl;
+
+        //while both players have health above 0
+        while(player->get_health() > 0 && opponent.get_health() > 0)
+        {   
+            cout << endl;
+            cout << "Round " << round << "!" << endl;
+            cout << "Player health: " << player->get_health() << " | Opponent health: " << opponent.get_health() << endl;
+            cout << "Player stamina: " << player->get_mana() << endl;
+            cout << "Which action would you like to take?" << endl;
+            cout << endl;
+            cout << "{0: End Game Early} {1: Basic Attack} {2: " << player->get_ability1() << "}"<< endl;
+        
+            int attack_input;
+            cin >> attack_input;
+
+            //defensive programming to make sure input is as expected
+            if (attack_input == 1 || attack_input == 2 || attack_input == 3 || attack_input == 0){
+                switch (attack_input){
+                    case 0:
+                    cout << "Exiting game... " << endl;
+                    exit(0); //terminates the program
+ 
+                    case 1:
+                    player->basic_attack(&opponent);
+                    cout << endl;
+                    break;
+
+                    case 2:
+                    //warrior can only use special ability if they have enough stamina
+                    if (player->get_abilityCost() > player->get_mana()){
+                        cout << "Not enough mana! Resting..." << endl;
+                        cout << endl;
+                        player->set_mana(player->get_mana() + 25);
+                        break; //***at this point this code forfeits the player's turn, i'm not sure how to fix this yet.***
+                    } else {
+                        player->ability1(&opponent, 0);
+                        cout << endl;
+                        break; 
+                    }  
+                } //switch statement end bracket
+
+                if(opponent.get_health() > 0){
+                    sleep(1); //pauses runtime for 1 second for new dice result (die result relies on time(0))
+
+                    //rolls a die to determine whether the opponent will use a basic attack or a special attack
+                    if (opponent.dice_roll() > 13 && (opponent.get_stamina() >= opponent.get_abilityCost())){
+                        cout << "Opponent uses an ability attack!" << endl;
+                        opponent.ability1(player, opponent.get_abilityCost());
+                    } else {
+                        opponent.basic_attack(player);
+                    }
+                }
+                if(player->get_health() <= 0){
+                    cout << opponent.get_name() << " wins!" << endl;
+                } else if (opponent.get_health() <= 0){
+                    cout << player->get_name() << " wins!" << endl;
+                }
+
+                //after each round, allow for stamina regeneration if an ability has not been used
+
+                round++; //aggregates round number
+
+                //clears status effects caused by ability attacks. Will edit status effects later.
+                player->clear_status_effects();
+                opponent.clear_status_effects();
+            
+            } else {
+                cout << "Invalid input! Please enter the number of the corresponding ability: ";
+                //break;
+
+            } //attack_input if-statment end bracket
+        } //While-loop end bracket
+
+        return 0;
     }
 
-    //Hulk player("Bertha");
-    Barbarian opponent("Bo");
-    //initialise round 1
-    int round = 1;
+    // cout << "Please select a Warrior class: " << endl;
+    // cout << "{1: Hulk} {2: Barbarian} {3: Valkyrie}" << endl;
+    // cout << endl;
+    // cin >> input_subclass;
 
-    //subclass testing
-    //cout << "Subclass: " << player.get_subclass() << endl;
+    // if (input_subclass == 1){
+    //     cout << "Please enter a name: ";
+    //     cin >> player_name;
+    //     player = new Hulk(player_name);
 
-    //while both players have health above 0
-    while(player->get_health() > 0 && opponent.get_health() > 0)
-    {   
-        cout << endl;
-        cout << "Round " << round << "!" << endl;
-        cout << "Player health: " << player->get_health() << " | Opponent health: " << opponent.get_health() << endl;
-        cout << "Player stamina: " << player->get_stamina() << endl;
-        cout << "Which action would you like to take?" << endl;
-        cout << endl;
-        cout << "{0: End Game Early} {1: Basic Attack} {2: " << player->get_ability1() << "}"<< endl;
+    // } else if (input_subclass == 2){
+    //     cout << "Please enter a name: ";
+    //     cin >> player_name;
+    //     player = new Barbarian(player_name);
+
+    // } else if (input_subclass == 3){
+    //     cout << "Please enter a name: ";
+    //     cin >> player_name;
+    //     player = new Valkyrie(player_name);
+
+    // } else {
+    //     cout << "Invalid input! Please enter a subclass." << endl;
+    // }
+
+    // //Hulk player("Bertha");
+    // Barbarian opponent("Bo");
+    // //initialise round 1
+    // int round = 1;
+
+    // //subclass testing
+    // cout << "Subclass: " << player->get_subclass() << endl;
+
+    // //while both players have health above 0
+    // while(player->get_health() > 0 && opponent.get_health() > 0)
+    // {   
+    //     cout << endl;
+    //     cout << "Round " << round << "!" << endl;
+    //     cout << "Player health: " << player->get_health() << " | Opponent health: " << opponent.get_health() << endl;
+    //     cout << "Player stamina: " << player->get_stamina() << endl;
+    //     cout << "Which action would you like to take?" << endl;
+    //     cout << endl;
+    //     cout << "{0: End Game Early} {1: Basic Attack} {2: " << player->get_ability1() << "}"<< endl;
         
-        int attack_input;
-        cin >> attack_input;
+    //     int attack_input;
+    //     cin >> attack_input;
 
-        //defensive programming to make sure input is as expected
-        if (attack_input == 1 || attack_input == 2 || attack_input == 3 || attack_input == 0){
-            switch (attack_input){
-                case 0:
-                cout << "Exiting game... " << endl;
-                exit(0); //terminates the program
+    //     //defensive programming to make sure input is as expected
+    //     if (attack_input == 1 || attack_input == 2 || attack_input == 3 || attack_input == 0){
+    //         switch (attack_input){
+    //             case 0:
+    //             cout << "Exiting game... " << endl;
+    //             exit(0); //terminates the program
  
-                case 1:
-                player->basic_attack(&opponent);
-                cout << endl;
-                break;
+    //             case 1:
+    //             player->basic_attack(&opponent);
+    //             cout << endl;
+    //             break;
 
-                case 2:
-                //warrior can only use special ability if they have enough stamina
-                if (player->get_abilityCost() > player->get_stamina()){
-                    cout << "Not enough stamina! Resting..." << endl;
-                    cout << endl;
-                    player->set_stamina(player->get_stamina() + 25);
-                    break; //***at this point this code forfeits the player's turn, i'm not sure how to fix this yet.***
-                } else {
-                    player->ability1(&opponent, player->get_abilityCost());
-                    cout << endl;
-                    break; 
-                }  
-            } //switch statement end bracket
+    //             case 2:
+    //             //warrior can only use special ability if they have enough stamina
+    //             if (player->get_abilityCost() > player->get_stamina()){
+    //                 cout << "Not enough stamina! Resting..." << endl;
+    //                 cout << endl;
+    //                 player->set_stamina(player->get_stamina() + 25);
+    //                 break; //***at this point this code forfeits the player's turn, i'm not sure how to fix this yet.***
+    //             } else {
+    //                 player->ability1(&opponent, player->get_abilityCost());
+    //                 cout << endl;
+    //                 break; 
+    //             }  
+    //         } //switch statement end bracket
 
-            if(opponent.get_health() > 0){
-                sleep(1); //pauses runtime for 1 second for new dice result (die result relies on time(0))
+    //         if(opponent.get_health() > 0){
+    //             sleep(1); //pauses runtime for 1 second for new dice result (die result relies on time(0))
 
-                //rolls a die to determine whether the opponent will use a basic attack or a special attack
-                if (opponent.dice_roll() > 13 && (opponent.get_stamina() >= opponent.get_abilityCost())){
-                    cout << "Opponent uses an ability attack!" << endl;
-                    opponent.ability1(player, opponent.get_abilityCost());
-                } else {
-                    opponent.basic_attack(player);
-                }
-            }
-            if(player->get_health() <= 0){
-                cout << opponent.get_name() << " wins!" << endl;
-            } else if (opponent.get_health() <= 0){
-                cout << player->get_name() << " wins!" << endl;
-            }
+    //             //rolls a die to determine whether the opponent will use a basic attack or a special attack
+    //             if (opponent.dice_roll() > 13 && (opponent.get_stamina() >= opponent.get_abilityCost())){
+    //                 cout << "Opponent uses an ability attack!" << endl;
+    //                 opponent.ability1(player, opponent.get_abilityCost());
+    //             } else {
+    //                 opponent.basic_attack(player);
+    //             }
+    //         }
+    //         if(player->get_health() <= 0){
+    //             cout << opponent.get_name() << " wins!" << endl;
+    //         } else if (opponent.get_health() <= 0){
+    //             cout << player->get_name() << " wins!" << endl;
+    //         }
 
-            //after each round, allow for stamina regeneration if an ability has not been used
+    //         //after each round, allow for stamina regeneration if an ability has not been used
 
-            round++; //aggregates round number
+    //         round++; //aggregates round number
 
-            //clears status effects caused by ability attacks. Will edit status effects later.
-            player->clear_status_effects();
-            opponent.clear_status_effects();
+    //         //clears status effects caused by ability attacks. Will edit status effects later.
+    //         player->clear_status_effects();
+    //         opponent.clear_status_effects();
             
-        } else {
-            cout << "Invalid input! Please enter the number of the corresponding ability: ";
-            //break;
+    //     } else {
+    //         cout << "Invalid input! Please enter the number of the corresponding ability: ";
+    //         //break;
 
-        } //attack_input if-statment end bracket
-    } //While-loop end bracket
+    //     } //attack_input if-statment end bracket
+    // } //While-loop end bracket
 
-    return 0;
-}//main end bracket
+    // return 0;
+} //main end bracket

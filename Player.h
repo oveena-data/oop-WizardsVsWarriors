@@ -29,6 +29,8 @@ class Player {
     bool does_it_hit(Player* opponent); //does the attack hit the player/opponent?
 
     void basic_attack(Player* opponent); //basic weapon attack, costs no mana/stamina
+    virtual void ability1 (Player* opponent, int cost) = 0;
+    //virtual void ability2 (Player* opponent, int cost) = 0;
     // virtual void ability1(Player* opponent, string name, int damage, int cost) = 0;
     // virtual void ability2(Player* opponent, string name, int damage, int cost) = 0;
 

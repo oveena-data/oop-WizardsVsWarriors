@@ -16,7 +16,7 @@ class Warrior : public Player {
     Warrior(); //default constructor
     Warrior(string subclass);
 
-    virtual void ability1 (Player* opponent, int cost) = 0;
+    //virtual void ability1 (Player* opponent, int cost) = 0;
 
     void set_subclass(string subclass);
     void set_stamina(int s);
