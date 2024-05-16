@@ -13,76 +13,87 @@
 using namespace std;
 
 int main(){
+    //initialise input variables and player name
     int input_class;
     int input_subclass;
     string player_name;
 
     //Player *player = NULL;
+
+    //initialise classes that use status effects
     Barbarian *barb = new Barbarian; 
 
+    //prompt the player for the choice between warrior or wizard
     cout << "Do you want to be a Warrior or a Wizard?" << endl;
     cout << "{1: Warrior} {2: Wizard}"<< endl;
     cin >> input_class;
 
-    if (input_class == 1){
-        Warrior *player = NULL;
-        system("clear");
+    if (input_class == 1){ //IF WARRIOR BEGIN IF STATEMENT
+        Warrior *player = NULL; //Initialise an empty warrior
+        system("clear"); //clear the terminal for tidiness
         cout << "Please select a Warrior class: " << endl;
         cout << "{1: Hulk} {2: Barbarian} {3: Valkyrie}" << endl;
         cout << endl;
         cin >> input_subclass;
 
+        //initialise bool to repeat input loop ** (seg fault???) **
         bool valid = false;
 
         while (!valid){
             if (input_subclass == 1){
                 cout << "Please enter a name: ";
                 cin >> player_name;
-                player = new Hulk(player_name);
+                player = new Hulk(player_name); //reassign player to hulk object
                 valid = true;
 
             } else if (input_subclass == 2){
                 cout << "Please enter a name: ";
                 cin >> player_name;
-                player = new Barbarian(player_name);
+                player = new Barbarian(player_name); //reassign player to barbarian object
                 valid = true;
 
             } else if (input_subclass == 3){
                 cout << "Please enter a name: ";
                 cin >> player_name;
-                player = new Valkyrie(player_name);
+                player = new Valkyrie(player_name); //reassign player to valkyrie object
                 valid = true;
 
             } else {
                 cout << "Invalid input! Please enter a subclass." << endl;
                 //delete player;
-                valid = false;
-                break;
+                //valid = false;
+                break; 
             }
 
         }
+        if (player == NULL){
+            cout << "Failed to create player. Terminating..." << endl;
+            delete barb;
+            return 1;
+        }
 
-        //Hulk player("Bertha");   FIX HARDCODED ENEMY
+        //Hulk player("Bertha");   **(FIX HARDCODED ENEMY)**
         Barbarian opponent("Bo");
         //initialise round 1
         int round = 1;
 
         //subclass testing
         cout << "Subclass: " << player->get_subclass() << endl;
-        sleep(3);
-        system("clear");
+        sleep(3); //pause terminal for 3 seconds to allow player to read
+        system("clear"); //clear terminal for tidiness
 
         //while both players have health above 0
         while(player->get_health() > 0 && opponent.get_health() > 0)
         {   
-            //system("clear");
+            //visuals
             cout << endl;
             cout << "-------------------------------------" << endl;
-            cout << "Round " << round << "!" << endl;
+            cout << "Round " << round << "!" << endl; //displays round number
             cout << "Player health: " << player->get_health() << " | Opponent health: " << opponent.get_health() << endl;
             cout << "Player stamina: " << player->get_stamina() << endl;
             cout << "Which action would you like to take?" << endl;
             cout << endl;
+            //listing actions player can take
             cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_abilityCost()<< " stamina)}"<< endl;
             cout << "{3: " << player->get_ability2() <<player->get_ability2()<<" stamina)}" << endl;
 
@@ -94,11 +105,11 @@ int main(){
                 switch (attack_input){
                     case 0:
                     cout << "Exiting game... " << endl;
-                    exit(0); //terminates the program
+                    exit(0); //terminates the program. mainly used for testing.
  
                     case 1:
                     player->basic_attack(&opponent);
-                    player->set_stamina(player->get_stamina() + 15);
+                    player->set_stamina(player->get_stamina() + 15); //stamina refills slightly on basic attack
                     cout << endl;
                     break;
 
@@ -116,6 +127,7 @@ int main(){
                     }  
                 } //switch statement end bracket
 
+                //if opponent is not out of health,
                 if(opponent.get_health() > 0){
                     sleep(1); //pauses runtime for 1 second for new dice result (die result relies on time(0))
 
@@ -171,12 +183,21 @@ int main(){
 
             } //attack_input if-statment end bracket
             sleep(3);
-            delete barb;
+            
         } //While-loop end bracket
+        delete barb; //subclasses used for status conditions must be deleted at end of game
 
         return 0;
 
 //WARRIOR CODE ^ ^ ^ 
+
+
+
+
+
+
+
+
 
 //WIZARD CODE \/  \/ \/
 
@@ -207,6 +228,12 @@ int main(){
          cout << "Invalid input! Please enter a subclass." << endl;
         }
 
+        if (player == NULL){
+            cout << "Failed to create player. Terminating..." << endl;
+            delete barb;
+            return 1;
+        }
+
         //Hulk player("Bertha");
         Barbarian opponent("Bo");
         //initialise round 1
@@ -218,12 +245,14 @@ int main(){
         //while both players have health above 0
         while(player->get_health() > 0 && opponent.get_health() > 0)
         {   
+            //visuals
             cout << endl;
             cout << "Round " << round << "!" << endl;
             cout << "Player health: " << player->get_health() << " | Opponent health: " << opponent.get_health() << endl;
             cout << "Player stamina: " << player->get_mana() << endl;
             cout << "Which action would you like to take?" << endl;
             cout << endl;
+            //player menu
             cout << "{0: End Game Early} {1: Basic Attack} {2: " << player->get_ability1() << " ("<<player->get_spell1_cost()<<" mana)}"<< endl;
             cout << "{3: " << player->get_ability2() <<" ("<<player->get_spell2_cost()<<" mana)}" << endl;
         
@@ -326,10 +355,11 @@ int main(){
 
             } //attack_input if-statment end bracket
             sleep(3);
-            delete barb;
+            
         } //While-loop end bracket
-
+        delete barb; //subclasses used for status conditions must be deleted at end of game
         return 0;
+
     } else {
         cout << "Invalid input! Terminating..." << endl;
     } // WARRIOR OR WIZARD end bracket
