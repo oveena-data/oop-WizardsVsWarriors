@@ -19,6 +19,10 @@ Player::Player(string name){
     this->health = 0;
 }
 
+Player::~Player(){
+    cout << "Player is deleted." << endl;
+}
+
 void Player::take_damage(int damage){
     int reduced_health = health - damage;
     this->health = reduced_health;  
@@ -105,6 +109,12 @@ void Player::set_name(string n){
 void Player::set_abilityCost(int cost){
     this->ability_cost = cost;
 }
+void Player::set_burnCounter(int c){
+    this->burn_counter = c;
+}
+void Player::set_stunCounter(int c){
+    this->stun_counter = c;
+}
 
 //GETTERS
 int Player::get_health(){
@@ -121,4 +131,10 @@ string Player::get_ability2(){
 }
 int Player::get_abilityCost(){
     return ability_cost;
+}
+int Player::get_burnCounter(){
+    return burn_counter;
+}
+int Player::get_stunCounter(){
+    return stun_counter;
 }

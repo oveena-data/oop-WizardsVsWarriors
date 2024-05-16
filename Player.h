@@ -18,9 +18,14 @@ class Player {
     string ability_name2;
     int ability_cost;
 
+    int burn_counter;
+    int armour_counter;
+    int stun_counter;
+
     public:
     Player(); //default constructor sets all values to 0, name to "unnamed"
     Player(string name); //constructor that takes a name, sets all other values to 0
+    virtual ~Player() = 0;
 
     //ATTACKS
     //virtual void ability_attack(Player* opponent) = 0; //virtual function for polymorphed ability attacks.
@@ -29,6 +34,7 @@ class Player {
 
     void basic_attack(Player* opponent); //basic weapon attack, costs no mana/stamina
     virtual void ability1 (Player* opponent, int cost) = 0;
+    virtual void ability2 (Player* opponent, int cost) = 0;
     //virtual void ability2 (Player* opponent, int cost) = 0;
     // virtual void ability1(Player* opponent, string name, int damage, int cost) = 0;
     // virtual void ability2(Player* opponent, string name, int damage, int cost) = 0;
@@ -51,11 +57,15 @@ class Player {
     string get_ability2();
     int get_health();
     int get_abilityCost();
+    int get_burnCounter();
+    int get_stunCounter();
 
     //SETTERS
     void set_health(int health);
     void set_name(string name);
     void set_abilityCost (int cost);
+    void set_burnCounter (int c);
+    void set_stunCounter(int c);
 
 };
 
