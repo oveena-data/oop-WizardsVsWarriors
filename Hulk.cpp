@@ -25,6 +25,9 @@ Hulk::Hulk(string name){
     this->ability_cost = 50;
     this->stun_duration = 1; //1 round
     this->smash_damage = 25;
+
+    this->burn_counter = 0;
+    this->stun_counter = 0;
 }
 
 void Hulk::ability1 (Player* opponent, int cost) {
@@ -37,4 +40,8 @@ void Hulk::ability1 (Player* opponent, int cost) {
         cout << this->name << " hulk smash missed its target!" << endl;
         this->set_stamina((stamina - cost));
     }
+}
+
+void Hulk::ability2 (Player* opponent, int cost) {
+
 }

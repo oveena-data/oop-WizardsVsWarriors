@@ -17,6 +17,7 @@ class Wizard : public Player{
     public:
     Wizard(); //default constructor
     Wizard(string subclass);
+    ~Wizard();
 
     //void ability1 (Player* opponent, int cost);
 

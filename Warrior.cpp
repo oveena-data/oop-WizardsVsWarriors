@@ -15,6 +15,10 @@ Warrior::Warrior(string s){
     this->stamina = 100;
 }
 
+Warrior::~Warrior(){
+    cout << "Warrior is deleted." << endl;
+}
+
 //SETTERS
 void Warrior::set_subclass(string s){
     this->subclass = s;

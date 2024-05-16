@@ -15,6 +15,7 @@ class Warrior : public Player {
     public:
     Warrior(); //default constructor
     Warrior(string subclass);
+    ~Warrior();
 
     //virtual void ability1 (Player* opponent, int cost) = 0;
 

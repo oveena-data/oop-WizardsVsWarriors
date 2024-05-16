@@ -15,6 +15,9 @@ FireWizard::FireWizard(string name){
     this->element = "Fire";
     this->subclass = "Fire Wizard";
 
+    this->burn_counter = 0;
+    this->stun_counter = 0;
+
     this->ability_name1 = "Fireball";
     this->spell1_cost = 40;
 

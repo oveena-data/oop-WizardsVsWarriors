@@ -13,6 +13,10 @@ Wizard::Wizard(string s){
     this->element = "Undefined";
 }
 
+Wizard::~Wizard(){
+    cout << "Wizard is deleted." << endl;
+}
+
 //SETTERS
 void Wizard::set_subclass(string s){
     this->subclass = s;

@@ -8,17 +8,18 @@ using namespace std;
 
 class Barbarian : public Warrior {
     public:
-    int poison_damage;
-    int poison_duration;
+    int burn_damage;
+    int burn_duration;
     //int ability_cost;
 
     Barbarian();
     Barbarian(string name);
 
     void ability1 (Player* opponent, int cost);
+    void ability2 (Player* opponent, int cost);
 
-    int get_poisonDamage();
-    int get_poisonDuration();
+    int get_burnDamage();
+    int get_burnDuration();
 
 };
 
