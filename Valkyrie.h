@@ -13,18 +13,18 @@ class Valkyrie : public Warrior {
     int smite_damage;
     int extra_armour;
     int armour_duration;
-    //int armour_counter;
+    //int ability_cost;
 
     Valkyrie();
     Valkyrie(string name);
 
-    void ability1 (Player* opponent, int cost);
-    void ability2 (Player* opponent, int cost);
+    void ability1 (Enemy* opponent, int cost);
+    void ability2 (Enemy* opponent, int cost);
 
     int get_smiteDamage();
     int get_extraArmour();
-    int get_armourDuration();
 
+    int get_armourDuration();
 };
 
 #endif
