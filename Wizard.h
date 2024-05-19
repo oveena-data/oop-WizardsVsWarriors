@@ -19,7 +19,8 @@ class Wizard : public Player{
     Wizard(string subclass);
     ~Wizard();
 
-    //void ability1 (Player* opponent, int cost);
+    // void ability1 (Player* opponent, int cost);
+    // void ability2 (Player* opponent, int cost);
 
     void set_subclass(string subclass);
     void set_mana(int m);

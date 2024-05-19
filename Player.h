@@ -59,6 +59,8 @@ class Player {
     int get_abilityCost();
     int get_burnCounter();
     int get_stunCounter();
+    int get_armourCounter();
+    int get_AC();
 
     //SETTERS
     void set_health(int health);
@@ -66,6 +68,8 @@ class Player {
     void set_abilityCost (int cost);
     void set_burnCounter (int c);
     void set_stunCounter(int c);
+    void set_armourCounter(int c);
+    void set_AC(int c);
 
 };
 

@@ -2,6 +2,8 @@
 #include "Warrior.h"
 #include "Wizard.h"
 #include "FireWizard.h"
+#include "WaterWizard.h"
+#include "AirWizard.h"
 #include "Hulk.h"
 #include "Barbarian.h"
 #include "Valkyrie.h"
@@ -10,7 +12,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-using namespace std;
+//using namespace std;
 
 int main(){
     //initialise input variables and player name
@@ -94,8 +96,8 @@ int main(){
             cout << "Which action would you like to take?" << endl;
             cout << endl;
             //listing actions player can take
-            cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_abilityCost()<< " stamina)}"<< endl;
-            cout << "{3: " << player->get_ability2() <<player->get_ability2()<<" stamina)}" << endl;
+            cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_abilityCost()<< " stamina)} "<<
+            "{3: " << player->get_ability2() <<" ("<<player->get_ability2()<<" stamina)}" << endl;
 
             int attack_input;
             cin >> attack_input;
@@ -165,6 +167,26 @@ int main(){
                     opponent.is_burning(0);
                 }
 
+                //after each round determine whether the player continues to have extra armour
+                if(player->get_armourCounter() > 0){
+                    player->set_armourCounter(player->get_armourCounter()-1);
+                    //should only use this if statement if there was an existing buff, hence nested if-statement
+                    if(player->get_armourCounter() == 0){
+                        player->set_AC(player->get_AC()-3);
+                        cout << player->get_name() << " has lost their bonus armour." << endl;
+                    }
+                }
+                //after each round determine whether the opponent continues to have extra armour
+                if(opponent.get_armourCounter() > 0){
+                    player->set_armourCounter(opponent.get_armourCounter() -1);
+                    //should only use this if statement if there was an existing buff, hence nested if-statement
+                    if(opponent.get_armourCounter() == 0){
+                        opponent.set_AC(opponent.get_AC()-3);
+                        cout << opponent.get_name() << " has lost their bonus armour." << endl;
+                    }
+                }
+
+                //Win condition
                 if(player->get_health() <= 0){
                     cout << opponent.get_name() << " wins!" << endl;
                 } else if (opponent.get_health() <= 0){
@@ -204,8 +226,9 @@ int main(){
 
     } else if (input_class == 2){
         Wizard *player = NULL;
+        system("clear"); //clear the terminal for tidiness
         cout << "Please select a Wizard class: " << endl;
-        cout << "{1: FireWizard} {2: ...} {3: ...}" << endl;
+        cout << "{1: FireWizard} {2: WaterWizard} {3: AirWizard}" << endl;
         cout << endl;
         cin >> input_subclass;
 
@@ -217,12 +240,12 @@ int main(){
         } else if (input_subclass == 2){
             cout << "Please enter a name: ";
             cin >> player_name;
-            //player = new Barbarian(player_name);
+            player = new WaterWizard(player_name);
 
         } else if (input_subclass == 3){
             cout << "Please enter a name: ";
             cin >> player_name;
-            //player = new Valkyrie(player_name);
+            player = new AirWizard(player_name);
 
         } else {
          cout << "Invalid input! Please enter a subclass." << endl;
@@ -241,20 +264,23 @@ int main(){
 
         //subclass testing
         cout << "Subclass: " << player->get_subclass() << endl;
+        sleep(3); //pause terminal for 3 seconds to allow player to read
+        system("clear"); //clear terminal for tidiness
 
         //while both players have health above 0
         while(player->get_health() > 0 && opponent.get_health() > 0)
         {   
             //visuals
             cout << endl;
-            cout << "Round " << round << "!" << endl;
+            cout << "-------------------------------------" << endl;
+            cout << "Round " << round << "!" << endl; //displays round number
             cout << "Player health: " << player->get_health() << " | Opponent health: " << opponent.get_health() << endl;
             cout << "Player stamina: " << player->get_mana() << endl;
             cout << "Which action would you like to take?" << endl;
             cout << endl;
-            //player menu
-            cout << "{0: End Game Early} {1: Basic Attack} {2: " << player->get_ability1() << " ("<<player->get_spell1_cost()<<" mana)}"<< endl;
-            cout << "{3: " << player->get_ability2() <<" ("<<player->get_spell2_cost()<<" mana)}" << endl;
+            //listing actions player can take
+            cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_spell1_cost()<< " mana)} "<<
+            "{3: " << player->get_ability2() << " (" <<player->get_spell2_cost()<<" mana)}" << endl;
         
             int attack_input;
             cin >> attack_input;
@@ -337,6 +363,26 @@ int main(){
                     opponent.is_burning(0);
                 }
 
+                //after each round determine whether the player continues to have extra armour
+                if(player->get_armourCounter() > 0){
+                    player->set_armourCounter(player->get_armourCounter()-1);
+                    //should only use this if statement if there was an existing buff, hence nested if-statement
+                    if(player->get_armourCounter() == 0){
+                        player->set_AC(player->get_AC()-3);
+                        cout << player->get_name() << " has lost their bonus armour." << endl;
+                    }
+                }
+                //after each round determine whether the opponent continues to have extra armour
+                if(opponent.get_armourCounter() > 0){
+                    player->set_armourCounter(opponent.get_armourCounter() -1);
+                    //should only use this if statement if there was an existing buff, hence nested if-statement
+                    if(opponent.get_armourCounter() == 0){
+                        opponent.set_AC(opponent.get_AC()-3);
+                        cout << opponent.get_name() << " has lost their bonus armour." << endl;
+                    }
+                }
+
+                //Win condition
                 if(player->get_health() <= 0){
                     cout << opponent.get_name() << " wins!" << endl;
                 } else if (opponent.get_health() <= 0){

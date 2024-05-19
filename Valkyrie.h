@@ -13,7 +13,7 @@ class Valkyrie : public Warrior {
     int smite_damage;
     int extra_armour;
     int armour_duration;
-    //int ability_cost;
+    //int armour_counter;
 
     Valkyrie();
     Valkyrie(string name);
@@ -23,8 +23,8 @@ class Valkyrie : public Warrior {
 
     int get_smiteDamage();
     int get_extraArmour();
-
     int get_armourDuration();
+
 };
 
 #endif

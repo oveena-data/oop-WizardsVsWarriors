@@ -18,6 +18,8 @@ class Warrior : public Player {
     ~Warrior();
 
     //virtual void ability1 (Player* opponent, int cost) = 0;
+    // virtual void ability1 (Player* opponent, int cost);
+    // virtual void ability2 (Player* opponent, int cost);
 
     void set_subclass(string subclass);
     void set_stamina(int s);

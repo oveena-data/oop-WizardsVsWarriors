@@ -115,6 +115,12 @@ void Player::set_burnCounter(int c){
 void Player::set_stunCounter(int c){
     this->stun_counter = c;
 }
+void Player::set_armourCounter(int c){
+    this->armour_counter = c;
+}
+void Player::set_AC(int c){
+    this->AC = c;
+}
 
 //GETTERS
 int Player::get_health(){
@@ -137,4 +143,10 @@ int Player::get_burnCounter(){
 }
 int Player::get_stunCounter(){
     return stun_counter;
+}
+int Player::get_armourCounter(){
+    return armour_counter;
+}
+int Player::get_AC(){
+    return AC;
 }

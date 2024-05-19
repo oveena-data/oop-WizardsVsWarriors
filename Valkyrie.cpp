@@ -44,9 +44,11 @@ void Valkyrie::ability1(Player* opponent, int cost){
 void Valkyrie::ability2(Player*opponent, int cost){
     this->AC = (AC + extra_armour);
     this->set_stamina(stamina-cost);
-    is_buffed(1);
+    this->armour_counter = 1;
+    //is_buffed(1);
     cout << this->name << "magically ups her defence by " << this->extra_armour << "!" << endl;
 }
+
 
 int Valkyrie::get_smiteDamage(){
     return smite_damage;
