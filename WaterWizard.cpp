@@ -30,7 +30,7 @@ WaterWizard::WaterWizard(string name){
     this->heal_duration= 2; //2 rounds
 }
 
-void WaterWizard::ability1(Player* opponent, int cost){
+void WaterWizard::ability1(Enemy* opponent, int cost){
     if (does_it_hit(opponent) == true){
         opponent->take_damage(wave_damage);
         this->set_mana((mana - spell1_cost));
@@ -41,7 +41,7 @@ void WaterWizard::ability1(Player* opponent, int cost){
     }
 }
 
-void WaterWizard::ability2(Player* opponent, int cost){
+void WaterWizard::ability2(Enemy* opponent, int cost){
     this->set_health(health + heal_amount);
     this->set_mana(mana-spell2_cost);
     //is_buffed(1);

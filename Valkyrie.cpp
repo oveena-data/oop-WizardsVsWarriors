@@ -30,7 +30,7 @@ Valkyrie::Valkyrie(string name){
     this->extra_armour = 3; //valkyrie can give herself extra armour using her second ability
 }
 
-void Valkyrie::ability1(Player* opponent, int cost){
+void Valkyrie::ability1(Enemy* opponent, int cost){
     if (does_it_hit(opponent) == true){
         opponent->take_damage(base_damage + smite_damage);
         this->set_stamina((stamina - cost));
@@ -41,14 +41,12 @@ void Valkyrie::ability1(Player* opponent, int cost){
     }
 }
 
-void Valkyrie::ability2(Player*opponent, int cost){
+void Valkyrie::ability2(Enemy* opponent, int cost){
     this->AC = (AC + extra_armour);
     this->set_stamina(stamina-cost);
-    this->armour_counter = 1;
-    //is_buffed(1);
+    is_buffed(1);
     cout << this->name << "magically ups her defence by " << this->extra_armour << "!" << endl;
 }
-
 
 int Valkyrie::get_smiteDamage(){
     return smite_damage;

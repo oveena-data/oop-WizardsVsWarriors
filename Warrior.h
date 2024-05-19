@@ -2,6 +2,7 @@
 #define WARRIOR_H
 
 #include "Player.h"
+#include "Enemy.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -18,8 +19,6 @@ class Warrior : public Player {
     ~Warrior();
 
     //virtual void ability1 (Player* opponent, int cost) = 0;
-    // virtual void ability1 (Player* opponent, int cost);
-    // virtual void ability2 (Player* opponent, int cost);
 
     void set_subclass(string subclass);
     void set_stamina(int s);

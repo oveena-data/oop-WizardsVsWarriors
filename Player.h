@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Enemy.h"
+
 #include <string>
 #include <iostream>
 using namespace std;
@@ -30,11 +32,11 @@ class Player {
     //ATTACKS
     //virtual void ability_attack(Player* opponent) = 0; //virtual function for polymorphed ability attacks.
 
-    bool does_it_hit(Player* opponent); //does the attack hit the player/opponent?
+    bool does_it_hit(Enemy* opponent); //does the attack hit the player/opponent?
 
-    void basic_attack(Player* opponent); //basic weapon attack, costs no mana/stamina
-    virtual void ability1 (Player* opponent, int cost) = 0;
-    virtual void ability2 (Player* opponent, int cost) = 0;
+    void basic_attack(Enemy* opponent); //basic weapon attack, costs no mana/stamina
+    virtual void ability1 (Enemy* opponent, int cost) = 0;
+    virtual void ability2 (Enemy* opponent, int cost) = 0;
     //virtual void ability2 (Player* opponent, int cost) = 0;
     // virtual void ability1(Player* opponent, string name, int damage, int cost) = 0;
     // virtual void ability2(Player* opponent, string name, int damage, int cost) = 0;
@@ -53,23 +55,26 @@ class Player {
 
     //GETTERS
     string get_name();
-    string get_ability1();
-    string get_ability2();
+    int get_AC();
     int get_health();
     int get_abilityCost();
+
+    string get_ability1();
+    string get_ability2();
+
     int get_burnCounter();
     int get_stunCounter();
     int get_armourCounter();
-    int get_AC();
 
     //SETTERS
     void set_health(int health);
     void set_name(string name);
     void set_abilityCost (int cost);
+    void set_AC(int c);
+
     void set_burnCounter (int c);
     void set_stunCounter(int c);
     void set_armourCounter(int c);
-    void set_AC(int c);
 
 };
 

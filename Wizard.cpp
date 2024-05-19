@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Wizard.h"
+
+#include "Enemy.h"
 #include <string>
 using namespace std;
 

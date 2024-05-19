@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Enemy.h"
 #include "Warrior.h"
 #include "Barbarian.h"
 
@@ -32,7 +33,7 @@ Barbarian::Barbarian(string name){
     this->stun_counter = 0;
 }
 
-void Barbarian::ability1(Player* opponent, int cost){
+void Barbarian::ability1(Enemy* opponent, int cost){
     if (does_it_hit(opponent) == true){
         opponent->set_burnCounter(2);
         opponent->take_damage(base_damage + burn_damage);
@@ -46,7 +47,7 @@ void Barbarian::ability1(Player* opponent, int cost){
     }
 }
 
-void Barbarian::ability2(Player* opponent, int cost){
+void Barbarian::ability2(Enemy* opponent, int cost){
     this->AC = (AC - 2);
     this->base_damage = (base_damage + 4);
     this->set_stamina(stamina-cost);

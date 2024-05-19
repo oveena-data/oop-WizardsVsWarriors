@@ -1,5 +1,6 @@
 #include "Wizard.h"
 #include "FireWizard.h"
+#include "Enemy.h"
 #include <string>
 using namespace std;
 
@@ -27,7 +28,7 @@ FireWizard::FireWizard(string name){
     this->burn_duration = 2; //2 rounds
 }
 
-void FireWizard::ability1(Player* opponent, int cost){
+void FireWizard::ability1(Enemy* opponent, int cost){
     if (does_it_hit(opponent) == true){
         opponent->take_damage(fireball_damage);
         this->set_mana((mana - spell1_cost));
@@ -38,7 +39,7 @@ void FireWizard::ability1(Player* opponent, int cost){
     }
 }
 
-void FireWizard::ability2(Player* opponent, int cost){
+void FireWizard::ability2(Enemy* opponent, int cost){
     if (does_it_hit(opponent) == true){
         opponent->take_damage(emberspit_damage);
         this->set_mana((mana - spell2_cost));

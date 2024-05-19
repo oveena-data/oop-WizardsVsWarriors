@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Enemy.h"
 #include <string>
 #include <unistd.h>
 using namespace std;
@@ -17,6 +18,10 @@ Player::Player(string name){
     this->base_damage= 0;
     this->speed = 0;
     this->health = 0;
+
+    this->burn_counter = 0;
+    this->stun_counter = 0;
+    this->armour_counter = 0;
 }
 
 Player::~Player(){
@@ -37,15 +42,15 @@ int Player::dice_roll(){
     return roll;  //returns rand number between 1-20
 }
 
-bool Player::does_it_hit(Player* opponent){
-    if ((dice_roll() + chance_to_hit) > opponent->AC){ //if the sum beats the opponents defence it hits
+bool Player::does_it_hit(Enemy* opponent){
+    if ((dice_roll() + chance_to_hit) > opponent->get_AC()){ //if the sum beats the opponents defence it hits
         return true;
     } else {
         return false;
     }
 }
 
-void Player::basic_attack(Player* opponent){
+void Player::basic_attack(Enemy* opponent){
     if (does_it_hit(opponent) == true){
         opponent->take_damage(base_damage);
         cout << this->name << " hits " << opponent->get_name() << " with a basic attack for " << this->base_damage << " damage!" << endl;
