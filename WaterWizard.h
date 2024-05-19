@@ -17,8 +17,8 @@ class WaterWizard : public Wizard {
     WaterWizard();
     WaterWizard(string name);
 
-    void ability1 (Player* opponent, int cost);
-    void ability2 (Player* opponent, int cost);
+    void ability1 (Enemy* opponent, int cost);
+    void ability2 (Enemy* opponent, int cost);
 
     int get_waveDamage();
     int get_healAmount();
