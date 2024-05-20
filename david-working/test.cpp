@@ -85,6 +85,21 @@ class Cultist : virtual public Sorcerer {
         }
 };
 
+class BlackMage : virtual public Sorcerer {
+    public:
+        protected: 
+        int _armour = 60;
+    public:
+        virtual int getArmour()
+        {
+            return _armour;
+        }
+        virtual void setArmour(int new_armour)
+        {
+            _armour = new_armour;
+        }
+};
+
 class Headhunter : virtual public Raider {
     
     public:
@@ -123,7 +138,6 @@ int main() {
     opponent->setHealth(2);
     cout << "New Enemy getHealth: " << opponent->getHealth() << endl;
 
-
     cout << "Old Sorcerer getMana: " << opponent->getMana() << endl;
     opponent->setMana(30);
     cout << "New Sorcerer getMana: " << opponent->getMana() << endl;
@@ -135,6 +149,10 @@ int main() {
     cout << "Old Cultist getArmour: " << opponent->getArmour() << endl;
     opponent->setArmour(110);
     cout << "New Cultist getArmour: " << opponent->getArmour() << endl;
+
+    cout << "Old BlackMage getArmour: " << opponent->getArmour() << endl;
+    opponent->setArmour(120);
+    cout << "New BlackMage getArmour: " << opponent->getArmour() << endl;
 
     cout << "Old Headhunter getDexterity: " << opponent->getDexterity() << endl;
     opponent->setDexterity(120);
