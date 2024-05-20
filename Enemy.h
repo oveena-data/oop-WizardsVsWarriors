@@ -38,7 +38,7 @@ class Enemy {
     //ATTACKS
     //virtual void ability_attack(Player* opponent) = 0; //virtual function for polymorphed ability attacks.
 
-    bool does_it_hit(Player* player); //does the attack hit the player/opponent?
+    bool does_it_hit_thePlayer(Player* player); //does the attack hit the player/opponent?
 
     void basic_attack(Player* player); //basic weapon attack, costs no mana/stamina
     virtual void ability1 (Player* player, int cost) = 0;

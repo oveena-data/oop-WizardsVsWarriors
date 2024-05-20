@@ -39,7 +39,7 @@ Assassin::Assassin(string name){
 
 //ability 1l "Measured Cut" 
 void Assassin::ability1(Player* player, int cost){
-    if (does_it_hit(player) == true){
+    if (does_it_hit_thePlayer(player) == true){
         player->take_damage(base_damage);
         
         this->set_stamina((stamina - cost));
@@ -51,7 +51,7 @@ void Assassin::ability1(Player* player, int cost){
 }
 
 void Assassin::ability2(Player* player, int cost){
-    if (does_it_hit(player) == true){
+    if (does_it_hit_thePlayer(player) == true){
         player->take_damage(base_damage);
         //player->is_poisoned(1); //sets poisoned boolean to true
         //this->set_poisonCounter(2);
@@ -67,7 +67,7 @@ void Assassin::ability2(Player* player, int cost){
 void Assassin::ability3(Player* player, int cost){
     this->chance_to_hit = (chance_to_hit + 3);
     this->set_stamina(stamina-cost);
-    if (does_it_hit(player) == true){
+    if (does_it_hit_thePlayer(player) == true){
         player->take_damage(base_damage);
         this->set_stamina((stamina - cost));
         cout << this->name << " strikes at " << player->get_name() << " with precision for " << (base_damage) << " damage!" << endl;

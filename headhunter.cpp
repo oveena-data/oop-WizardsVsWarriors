@@ -36,7 +36,7 @@ Headhunter::Headhunter(string name){
 }
 
 void Headhunter::ability1(Player* player, int cost){
-    if (does_it_hit(player) == true){
+    if (does_it_hit_thePlayer(player) == true){
         //player->set_burnCounter(2);
         player->take_damage(base_damage);
         //player->is_poisoned(1); //sets poisoned boolean to true
@@ -49,7 +49,7 @@ void Headhunter::ability1(Player* player, int cost){
 }
 
 void Headhunter::ability2(Player* player, int cost){
-    if (does_it_hit(player) == true){
+    if (does_it_hit_thePlayer(player) == true){
         player->take_damage(base_damage);
         this->set_stamina((stamina - cost));
         cout << this->name << " deals savage blows to " << player->get_name() << " with evil blades for " << (base_damage) << " damage!" << endl;
