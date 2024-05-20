@@ -1,11 +1,12 @@
 #ifndef CRYOMANCER_H
 #define CRYOMANCER_H
 
-#include "Sorcerer.h"
+#include "Wizard.h"
+#include "Player.h"
 #include <string>
 using namespace std;
 
-class Cryomancer : public Sorcerer {
+class Cryomancer : public Wizard {
     public:
     int ice_spike_damage;
     int arctic_storm_damage;

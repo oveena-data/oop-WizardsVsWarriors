@@ -1,5 +1,6 @@
-#include "Sorcerer.h"
+#include "Wizard.h"
 #include "Blackmage.h"
+#include "Player.h"
 
 #include "Player.h"
 #include <string>
@@ -73,7 +74,7 @@ void BlackMage::get_subclass_attributes()
 }
 
 void BlackMage::ability1(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(dark_bolt_damage);
         this->set_mana((mana - spell1_cost));
         cout << this->name << " hits " << player->get_name() << " with a dark bolt for " << (dark_bolt_damage) << " damage!" << endl;
@@ -84,7 +85,7 @@ void BlackMage::ability1(Player* player, int cost){
 }
 
 void BlackMage::ability2(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(dark_storm_damage);
         this->set_mana((mana - spell2_cost));
         cout << this->name << "'s evil storm courses around " << player->get_name() << " and deals " << (dark_storm_damage) << " damage!" << endl;
@@ -96,7 +97,7 @@ void BlackMage::ability2(Player* player, int cost){
 
 void BlackMage::ability3(Player* player, int cost){
     this->AC = AC + 5;
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(creeping_death_damage);
         this->set_mana((mana - spell3_cost));
         cout << this->name << "'s dread spell spills forth at " << player->get_name() << " for " << (creeping_death_damage) << " damage!" << endl;

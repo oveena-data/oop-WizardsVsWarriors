@@ -1,7 +1,8 @@
-#include "Sorcerer.h"
+
 #include "Cryomancer.h"
 
 #include "Player.h"
+#include "Wizard.h"
 #include <string>
 using namespace std;
 
@@ -80,7 +81,7 @@ void Cryomancer::get_subclass_attributes()
 }
 
 void Cryomancer::ability1(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(ice_spike_damage);
         this->set_mana((mana - spell1_cost));
         cout << this->name << " pierces " << player->get_name() << " with an ice spike for " << (ice_spike_damage) << " damage!" << endl;
@@ -91,7 +92,7 @@ void Cryomancer::ability1(Player* player, int cost){
 }
 
 void Cryomancer::ability2(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(arctic_storm_damage);
         this->set_mana((mana - spell2_cost));
         cout << this->name << "'s icy storm rages around " << player->get_name() << " for " << (arctic_storm_damage) << " damage!" << endl;
@@ -102,7 +103,7 @@ void Cryomancer::ability2(Player* player, int cost){
 }
 
 void Cryomancer::ability3(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(ice_nova_damage);
         this->set_mana((mana - spell3_cost));
         

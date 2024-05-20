@@ -1,4 +1,4 @@
-#include "Sorcerer.h"
+#include "Wizard.h"
 #include "Cultist.h"
 
 #include "Player.h"
@@ -73,7 +73,7 @@ void Cultist::get_subclass_attributes()
 }
 
 void Cultist::ability1(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(demonic_flame_damage);
         this->set_mana((mana - spell1_cost));
         cout << this->name << " blasts " << player->get_name() << " with a demonic flame for " << (demonic_flame_damage) << " damage!" << endl;
@@ -84,7 +84,7 @@ void Cultist::ability1(Player* player, int cost){
 }
 
 void Cultist::ability2(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(inferno_damage);
         this->set_mana((mana - spell2_cost));
         cout << this->name << "'s fiery inferno blasts " << player->get_name() << " for " << (inferno_damage) << " damage!" << endl;
@@ -95,7 +95,7 @@ void Cultist::ability2(Player* player, int cost){
 }
 
 void Cultist::ability3(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(cinder_damage);
         this->set_mana((mana - spell3_cost));
         

@@ -1,12 +1,13 @@
 #ifndef OATHBREAKER_H
 #define OATHBREAKER_H
 
-#include "Enemy.h"
-#include "Raider.h"
+//#include "Enemy.h"
+#include "Player.h"
+#include "Warrior.h"
 #include <string>
 using namespace std;
 
-class Oathbreaker : public Raider {
+class Oathbreaker : public Warrior {
     public:
     int domination_duration;
     int domination_counter;

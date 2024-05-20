@@ -2,7 +2,7 @@
 #define AIRWIZARD_H
 
 #include "Wizard.h"
-#include "Enemy.h"
+//#include "Enemy.h"
 #include <string>
 using namespace std;
 
@@ -18,8 +18,9 @@ class AirWizard : public Wizard {
     AirWizard();
     AirWizard(string name);
 
-    void ability1 (Enemy* opponent, int cost);
-    void ability2 (Enemy* opponent, int cost);
+    void ability1 (Player* opponent, int cost);
+    void ability2 (Player* opponent, int cost);
+    void ability3 (Player* opponent, int cost);
 
     int get_gustDamage();
     int get_extraArmour();

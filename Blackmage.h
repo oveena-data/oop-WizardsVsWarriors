@@ -1,11 +1,12 @@
 #ifndef BLACKMAGE_H
 #define BLACKMAGE_H
 
-#include "Sorcerer.h"
+#include "Wizard.h"
+#include "Player.h"
 #include <string>
 using namespace std;
 
-class BlackMage : public Sorcerer {
+class BlackMage : public Wizard {
     public:
     int dark_bolt_damage;
     int dark_storm_damage;

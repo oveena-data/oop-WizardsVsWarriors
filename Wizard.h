@@ -2,7 +2,7 @@
 #define WIZARD_H
 
 #include "Player.h"
-#include "Enemy.h"
+//#include "Enemy.h"
 #include <string>
 using namespace std;
 
@@ -14,6 +14,7 @@ class Wizard : public Player{
 
     int spell1_cost;
     int spell2_cost;
+    int spell3_cost;
 
     public:
     Wizard(); //default constructor
@@ -28,6 +29,7 @@ class Wizard : public Player{
     int get_mana();
     int get_spell1_cost();
     int get_spell2_cost();
+    int get_spell3_cost();
 
     string stamina_or_mana();
     string get_subclass();

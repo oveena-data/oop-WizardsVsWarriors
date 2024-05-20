@@ -1,12 +1,13 @@
 #ifndef HEADHUNTER_H
 #define HEADHUNTER_H
 
-#include "Enemy.h"
-#include "Raider.h"
+//#include "Enemy.h"
+#include "Player.h"
+#include "Warrior.h"
 #include <string>
 using namespace std;
 
-class Headhunter : public Raider {
+class Headhunter : public Warrior {
     public:
     int frenzy_duration;
     int frenzy_counter;

@@ -1,5 +1,6 @@
-#include "Enemy.h"
-#include "Raider.h"
+//#include "Enemy.h"
+//#include "Raider.h"
+#include "Warrior.h"
 #include "Oathbreaker.h"
 
 #include "Player.h"
@@ -26,11 +27,14 @@ Oathbreaker::Oathbreaker(string name){
     this->subclass = "Oathbreaker";
 
     this->ability_name1 = "Cleave";
-    this->ability_cost = 20;
+    this->ability1_cost = 20;
+
     this->ability_name2 = "Zealous Charge";
-    this->ability_cost = 35;
+    this->ability2_cost = 35;
+
     this->ability_name3 = "Domination";
-    this->ability_cost = 40;
+    this->ability3_cost = 40;
+
     this->brace_duration = 2;
     this->brace_counter = 0;
     this->domination_duration = 2;
@@ -38,7 +42,7 @@ Oathbreaker::Oathbreaker(string name){
 }
 
 void Oathbreaker::ability1(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         //player->set_burnCounter(2);
         player->take_damage(base_damage);
         //player->is_poisoned(1); //sets poisoned boolean to true
@@ -51,7 +55,7 @@ void Oathbreaker::ability1(Player* player, int cost){
 }
 
 void Oathbreaker::ability2(Player* player, int cost){
-    if (does_it_hit_thePlayer(player) == true){
+    if (does_it_hit(player) == true){
         player->take_damage(base_damage);
         this->set_stamina((stamina - cost));
         cout << this->name << " charges at " << player->get_name() << " with frenzied intent for " << (base_damage) << " damage!" << endl;

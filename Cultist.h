@@ -1,11 +1,12 @@
 #ifndef CULTIST_H
 #define CULTIST_H
 
-#include "Sorcerer.h"
+#include "Wizard.h"
+#include "Player.h"
 #include <string>
 using namespace std;
 
-class Cultist : public Sorcerer {
+class Cultist : public Wizard {
     public:
     int demonic_flame_damage;
     int inferno_damage;

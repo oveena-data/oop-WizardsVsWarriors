@@ -1,12 +1,13 @@
 #ifndef ASSASSIN_H
 #define ASSASSIN_H
 
-#include "Enemy.h"
-#include "Raider.h"
+#include "Warrior.h"
+#include "Player.h"
+//#include "Raider.h"
 #include <string>
 using namespace std;
 
-class Assassin : public Raider {
+class Assassin : public Warrior {
     public:
     int smokescreen_duration;
     int smokescreen_counter;
