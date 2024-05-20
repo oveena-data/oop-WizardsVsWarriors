@@ -1,28 +1,26 @@
 #include <iostream>
+#include <unistd.h>
+#include <stdlib.h>
+
+#include "Player.h"
+#include "Warrior.h"
+#include "Wizard.h"
+
 //include enemy paths
-#include "Enemy.h"
-#include "Sorcerer.h"
-#include "Raider.h"
 #include "Cryomancer.h"
 #include "Blackmage.h"
 #include "Cultist.h"
 #include "Headhunter.h"
 #include "Oathbreaker.h"
 #include "Assassin.h"
+
 //include player paths
-#include "Player.h"
-#include "Warrior.h"
-#include "Wizard.h"
 #include "FireWizard.h"
 #include "WaterWizard.h"
 #include "AirWizard.h"
 #include "Hulk.h"
 #include "Barbarian.h"
 #include "Valkyrie.h"
-
-#include <iostream>
-#include <unistd.h>
-#include <stdlib.h>
 
 using namespace std;
 
@@ -36,71 +34,6 @@ int main(){
 
     //initialise classes that use status effects
     Barbarian *barb = new Barbarian; 
-    Sorcerer *sorc = new Cultist;
-    
-    // Create enemy 
-    srand(time(0)); // reseeds the rand() function
-    int enemyChoice = rand() % 6;
-    //cout << "Choose enemy class" << endl;
-    //cout << "Headhunter (1), Cryomancer (2)" << endl;
-    //cin >> enemyChoice;
-    Enemy* opponent;
-    if (enemyChoice == 0)
-    {
-        opponent = new Headhunter();
-        Headhunter* headhunter = static_cast<Headhunter*> (opponent);
-        opponent->set_attributes("Headhunter", 100, 15, 10, 8);
-        //opponent->print_attributes(); 
-        headhunter->set_subclass_attributes(); 
-        //opponent->get_subclass_attributes();
-        cout << "You face a " << opponent->get_name() << endl;
-    }   else if (enemyChoice == 1)
-    {
-        opponent = new Oathbreaker();
-        Oathbreaker* oathbreaker = static_cast<Oathbreaker*> (opponent);
-        opponent->set_attributes("Oathbreaker", 100, 15, 10, 8);
-        //opponent->print_attributes(); 
-        oathbreaker->set_subclass_attributes(); 
-        //opponent->get_subclass_attributes();
-        cout << "You face a " << opponent->get_name() << endl;
-    }   else if (enemyChoice == 2)
-    {
-        opponent = new Assassin();
-        Assassin* assassin = static_cast<Assassin*> (opponent);
-        opponent->set_attributes("Assassin", 100, 15, 10, 8);
-        //opponent->print_attributes(); 
-        assassin->set_subclass_attributes(); 
-        //opponent->get_subclass_attributes();
-        cout << "You face a " << opponent->get_name() << endl;
-    }   else if (enemyChoice == 3)
-    {
-        opponent = new Cryomancer();
-        Cryomancer* cryomancer = static_cast<Cryomancer*> (opponent);    
-        opponent->set_attributes("Cryomancer", 11, 60, 7, 5);
-        //opponent->print_attributes(); 
-        cryomancer->set_subclass_attributes(); 
-        //opponent->get_subclass_attributes();
-        cout << "You face a " << opponent->get_name() << endl;
-    } else if (enemyChoice == 4)
-    {
-        opponent = new BlackMage();
-        BlackMage* blackmage = static_cast<BlackMage*> (opponent);
-        opponent->set_attributes("Blackmage", 11, 60, 7, 5);
-        //opponent->print_attributes(); 
-        blackmage->set_subclass_attributes(); 
-        //opponent->get_subclass_attributes();
-        cout << "You face a " << opponent->get_name() << endl;
-    } else if (enemyChoice == 5)
-    {
-        opponent = new Cultist();
-        Cultist* cultist = static_cast<Cultist*> (opponent);
-        opponent->set_attributes("Cultist", 11, 60, 7, 5);
-        //opponent->print_attributes(); 
-        cultist->set_subclass_attributes(); 
-        //opponent->get_subclass_attributes();
-        cout << "You face a " << opponent->get_name() << endl;
-    }
-    
 
     //prompt the player for the choice between warrior or wizard
     cout << "Do you want to be a Warrior or a Wizard?" << endl;
@@ -164,6 +97,72 @@ int main(){
         sleep(3); //pause terminal for 3 seconds to allow player to read
         system("clear"); //clear terminal for tidiness
 
+        srand(time(0)); // reseeds the rand() function
+        int enemyChoice = rand() % 6;
+    
+        Player* opponent;
+        if (enemyChoice == 0)
+        {
+            opponent = new Headhunter();
+            Headhunter* headhunter = static_cast<Headhunter*> (opponent);
+            opponent->set_attributes("Headhunter", 13, 70, 7, 3);
+            opponent->set_staminaOrMana(1);
+            //opponent->print_attributes(); 
+            headhunter->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }   else if (enemyChoice == 1)
+        {
+            opponent = new Oathbreaker();
+            Oathbreaker* oathbreaker = static_cast<Oathbreaker*> (opponent);
+            opponent->set_attributes("Oathbreaker", 16, 90, 8, 3);
+            opponent->set_staminaOrMana(1);
+            //opponent->print_attributes(); 
+            oathbreaker->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }   else if (enemyChoice == 2)
+        {
+            opponent = new Assassin();
+            Assassin* assassin = static_cast<Assassin*> (opponent);
+            opponent->set_attributes("Assassin", 13, 70, 10, 4);
+            opponent->set_staminaOrMana(1);
+            //opponent->print_attributes(); 
+            assassin->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }   else if (enemyChoice == 3)
+        {
+            opponent = new Cryomancer();
+            Cryomancer* cryomancer = static_cast<Cryomancer*> (opponent);    
+            opponent->set_attributes("Cryomancer", 11, 60, 7, 5);
+            opponent->set_staminaOrMana(2);
+            //opponent->print_attributes(); 
+            cryomancer->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        } else if (enemyChoice == 4)
+        {
+            opponent = new BlackMage();
+            BlackMage* blackmage = static_cast<BlackMage*> (opponent);
+            opponent->set_attributes("Blackmage", 11, 60, 7, 5);
+            opponent->set_staminaOrMana(2);
+            //opponent->print_attributes(); 
+            blackmage->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        } else if (enemyChoice == 5)
+        {
+            opponent = new Cultist();
+            Cultist* cultist = static_cast<Cultist*> (opponent);
+            opponent->set_attributes("Cultist", 11, 60, 7, 5);
+            opponent->set_staminaOrMana(2);
+            //opponent->print_attributes(); 
+            cultist->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }
+
         //while both players have health above 0
         while(player->get_health() > 0 && opponent->get_health() > 0)
         {   
@@ -192,6 +191,9 @@ int main(){
                     case 1:
                     player->basic_attack(opponent);
                     player->set_stamina(player->get_stamina() + 15); //stamina refills slightly on basic attack
+                    if (player->get_stamina() > 100){
+                        player->set_stamina(100);
+                    } 
                     cout << endl;
                     break;
 
@@ -248,6 +250,8 @@ int main(){
                             opponent->basic_attack(player);
                             opponent->set_stamina(opponent->get_stamina() + 15);
                         }
+                    } else {
+                        cout << "not attacking?" << endl;
                     }
                 } //if opponent health > 0
 
@@ -319,7 +323,7 @@ int main(){
 
         return 0;
 
-//WARRIOR CODE ^ ^ ^ 
+    //WARRIOR CODE ^ ^ ^ 
 
 
 
@@ -329,7 +333,7 @@ int main(){
 
 
 
-//WIZARD CODE \/  \/ \/
+    //WIZARD CODE \/  \/ \/
 
 
     } else if (input_class == 2){
@@ -371,6 +375,68 @@ int main(){
 
         //subclass testing
         cout << "Subclass: " << player->get_subclass() << endl;
+        sleep(3); //pause terminal for 3 seconds to allow player to read
+        system("clear"); //clear terminal for tidiness
+
+        srand(time(0)); // reseeds the rand() function
+        int enemyChoice = rand() % 6;
+    
+        Player* opponent;
+        if (enemyChoice == 0)
+        {
+            opponent = new Headhunter();
+            Headhunter* headhunter = static_cast<Headhunter*> (opponent);
+            opponent->set_attributes("Headhunter", 100, 15, 10, 8);
+            //opponent->print_attributes(); 
+            headhunter->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }   else if (enemyChoice == 1)
+        {
+            opponent = new Oathbreaker();
+            Oathbreaker* oathbreaker = static_cast<Oathbreaker*> (opponent);
+            opponent->set_attributes("Oathbreaker", 100, 15, 10, 8);
+            //opponent->print_attributes(); 
+            oathbreaker->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }   else if (enemyChoice == 2)
+        {
+            opponent = new Assassin();
+            Assassin* assassin = static_cast<Assassin*> (opponent);
+            opponent->set_attributes("Assassin", 100, 15, 10, 8);
+            //opponent->print_attributes(); 
+            assassin->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }   else if (enemyChoice == 3)
+        {
+            opponent = new Cryomancer();
+            Cryomancer* cryomancer = static_cast<Cryomancer*> (opponent);    
+            opponent->set_attributes("Cryomancer", 11, 60, 7, 5);
+            //opponent->print_attributes(); 
+            cryomancer->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        } else if (enemyChoice == 4)
+        {
+            opponent = new BlackMage();
+            BlackMage* blackmage = static_cast<BlackMage*> (opponent);
+            opponent->set_attributes("Blackmage", 11, 60, 7, 5);
+            //opponent->print_attributes(); 
+            blackmage->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        } else if (enemyChoice == 5)
+        {
+            opponent = new Cultist();
+            Cultist* cultist = static_cast<Cultist*> (opponent);
+            opponent->set_attributes("Cultist", 11, 60, 7, 5);
+            //opponent->print_attributes(); 
+            cultist->set_subclass_attributes(); 
+            //opponent->get_subclass_attributes();
+            cout << "You face a " << opponent->get_name() << endl;
+        }
 
         //while both players have health above 0
         while(player->get_health() > 0 && opponent->get_health() > 0)
@@ -399,6 +465,10 @@ int main(){
                     case 1:
                     player->basic_attack(opponent);
                     player->set_mana(player->get_mana() + 15);
+
+                    if (player->get_mana() > 100){
+                        player->set_mana(100);
+                    } 
                     cout << endl;
                     break;
 
@@ -542,4 +612,6 @@ int main(){
     } else {
         cout << "Invalid input! Terminating..." << endl;
     } // WARRIOR OR WIZARD end bracket
+
+    return 0;
 } //main end bracket
