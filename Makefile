@@ -1,5 +1,5 @@
-output: main.o assassin.o blackmage.o cryomancer.o cultist.o headhunter.o oathbreaker.o raider.o sorcerer.o airwizard.o FireWizard.o Hulk.o Player.o Valkyrie.o Warrior.o Wizard.o WaterWizard.o
-	g++ main.o assassin.o blackmage.o cryomancer.o cultist.o headhunter.o oathbreaker.o raider.o sorcerer.o airwizard.o FireWizard.o Hulk.o Player.o Valkyrie.o Warrior.o Wizard.o WaterWizard.o -o output
+output: main.o assassin.o Barbarian.o blackmage.o cryomancer.o cultist.o headhunter.o oathbreaker.o airwizard.o FireWizard.o Hulk.o Player.o Valkyrie.o Warrior.o Wizard.o WaterWizard.o
+	g++ main.o assassin.o Barbarian.o blackmage.o cryomancer.o cultist.o headhunter.o oathbreaker.o airwizard.o FireWizard.o Hulk.o Player.o Valkyrie.o Warrior.o Wizard.o WaterWizard.o -o output
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -7,6 +7,9 @@ main.o: main.cpp
 assassin.o: assassin.cpp Assassin.h
 	g++ -c assassin.cpp
 
+Barbarian.o: Barbarian.cpp Barbarian.h
+	g++ -c Barbarian.cpp
+	
 blackmage.o: blackmage.cpp Blackmage.h
 	g++ -c blackmage.cpp
 
@@ -21,12 +24,6 @@ headhunter.o: headhunter.cpp Headhunter.h
 
 oathbreaker.o: oathbreaker.cpp Oathbreaker.h
 	g++ -c oathbreaker.cpp
-
-raider.o: raider.cpp Raider.h
-	g++ -c raider.cpp
-
-sorcerer.o: sorcerer.cpp Sorcerer.h
-	g++ -c sorcerer.cpp
 
 airwizard.o: airwizard.cpp AirWizard.h
 	g++ -c airwizard.cpp

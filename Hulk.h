@@ -16,6 +16,8 @@ class Hulk : public Warrior {
 
     public:
     int smash_damage;
+    int slap_damage;
+    int rumble_damage;
     int stun_duration;
     
     Hulk();

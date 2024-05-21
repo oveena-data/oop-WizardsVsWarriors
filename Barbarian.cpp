@@ -18,6 +18,7 @@ Barbarian::Barbarian(string name){
     this->AC = 13;
     this->health = 70;
     this->base_damage = 7;
+    this->whirlwind_damage = 7;
     this->speed = 4;
     this->chance_to_hit = 3;
     this->stamina = 100;
@@ -26,6 +27,10 @@ Barbarian::Barbarian(string name){
 
     this->ability_name1 = "Burning Blades";
     this->ability_cost = 30;
+    this->ability_name2 = "Fury";
+    this->ability_cost = 20;
+    this->ability_name1 = "Whirlwind";
+    this->ability_cost = 40;
     this->burn_damage = 5;
     this->burn_duration = 2; //2 rounds
 
@@ -55,7 +60,15 @@ void Barbarian::ability2(Player* opponent, int cost){
 }
 
 void Barbarian::ability3(Player* opponent, int cost){
-    cout << "Barbarian ability3." << endl;
+    if (does_it_hit(opponent) == true){
+        this->set_stamina((stamina - cost));
+        opponent->take_damage(whirlwind_damage);
+        cout << this->name << " hits " << opponent->get_name() << " for " << (whirlwind_damage) << " damage!" << endl;
+        cout << this->name << " hits " << opponent->get_name() << " again for " << (whirlwind_damage) << " damage!" << endl;
+    } else {
+        cout << this->name << "'s "<< this->get_ability1() << " missed its target!" << endl;
+        this->set_stamina((stamina - cost));
+    }
 }
 
 //GETTERS

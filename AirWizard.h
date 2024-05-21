@@ -9,6 +9,7 @@ using namespace std;
 class AirWizard : public Wizard {
     public:
     int gust_damage;
+    int lightning_damage;
     int extra_armour;
     int armour_duration;
     //int armour_counter;

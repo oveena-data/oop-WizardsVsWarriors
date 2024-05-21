@@ -3,9 +3,11 @@
 #include <string>
 using namespace std;
 
+/*
 WaterWizard::WaterWizard(){
 
 }
+*/
 
 WaterWizard::WaterWizard(string name){
     this->name = name;

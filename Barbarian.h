@@ -9,6 +9,7 @@ using namespace std;
 class Barbarian : public Warrior {
     public:
     int burn_damage;
+    int whirlwind_damage;
     int burn_duration;
     //int ability_cost;
 

@@ -176,7 +176,7 @@ int main(){
             cout << endl;
             //listing actions player can take
             cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_abilityCost()<< " stamina)}"<< endl;
-            cout << "{3: " << player->get_ability2() <<player->get_ability2()<<" stamina)}" << endl;
+            cout << "{3: " << player->get_ability2() <<" stamina)}" << endl;
 
             int attack_input;
             cin >> attack_input;
