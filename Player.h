@@ -22,7 +22,9 @@ class Player {
     string ability_name2;
     string ability_name3;
     string ability_name4;
-    int ability_cost;
+    int ability_cost1;
+    int ability_cost2;
+    int ability_cost3;
     int staminaOrMana;
 
     int burn_counter;
@@ -72,7 +74,9 @@ class Player {
     string get_name();
     int get_AC();
     int get_health();
-    int get_abilityCost();
+    int get_abilityCost1();
+    int get_abilityCost2();
+    int get_abilityCost3();
     int get_mana();
     int get_stamina();
 
@@ -87,7 +91,9 @@ class Player {
     //SETTERS
     void set_health(int health);
     void set_name(string name);
-    void set_abilityCost (int cost);
+    void set_abilityCost1(int cost);
+    void set_abilityCost2(int cost);
+    void set_abilityCost3(int cost);
     void set_AC(int c);
     void set_mana(int c);
     void set_stamina(int c);
