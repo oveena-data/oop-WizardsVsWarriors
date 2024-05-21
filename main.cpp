@@ -29,13 +29,13 @@ int main(){
     //initialise input variables and player name
     int input_class;
     int input_subclass;
+    string player_name;
 
     //Player *player = NULL;
 
     //initialise classes that use status effects
     Barbarian *barb = new Barbarian; 
 
-    string player_name;
     int XP = 10; //Default XP value to be gained after every battle.
 
     //Open file and pull name and XP
@@ -48,11 +48,14 @@ int main(){
         // Print name and XP
         cout << "Data read from stats.txt:" << endl;
         //cout << "Name: " << player_name << endl;
-        cout << "XP from previous battles: " << XP << endl;
+        //cout << "XP from previous battles: " << XP << endl;
     } else {
         cerr << "Unable to open file for reading." << endl;
         return 1;
     }
+    cout << "XP from previous battles: " << XP << endl;
+
+    
 
     //prompt the player for the choice between warrior or wizard
     cout << "Do you want to be a Warrior or a Wizard?" << endl;
@@ -195,8 +198,7 @@ int main(){
             cout << endl;
             //listing actions player can take
             cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_abilityCost()<< " stamina)}"<< endl;
-            cout << "{3: " << player->get_ability2() << " ("<<player->get_abilityCost()<< " stamina)}" << endl;
-            cout << "{4: " << player->get_ability3() << " ("<<player->get_abilityCost()<< " stamina)}" << endl;
+            cout << "{3: " << player->get_ability2() <<" stamina)}" << endl;
 
             int attack_input;
             cin >> attack_input;
@@ -323,24 +325,6 @@ int main(){
                     cout << opponent->get_name() << " wins!" << endl;
                 } else if (opponent->get_health() <= 0){
                     cout << player->get_name() << " wins!" << endl;
-
-                    //Increase XP by 10
-                    XP = XP + 10;
-
-                    // Write data to stats.txt
-                    ofstream outfile("stats.txt"); //Opens stats.txt to send data to file
-                    if (outfile.is_open()) {
-
-                        //Overwrites values inside stats.txt
-                        outfile << player_name << endl;
-                        outfile << XP << endl;
-
-                        outfile.close(); // Close file
-                        cout << "Data saved to stats.txt." << endl;
-                    } else {
-                        cerr << "Unable to open file for writing." << endl;
-                        return 1;
-                    }
                 }
 
                 round++; //aggregates round number
@@ -489,7 +473,6 @@ int main(){
             //player menu
             cout << "{0: End Game Early} {1: Basic Attack} {2: " << player->get_ability1() << " ("<<player->get_spell1_cost()<<" mana)}"<< endl;
             cout << "{3: " << player->get_ability2() <<" ("<<player->get_spell2_cost()<<" mana)}" << endl;
-            cout << "{4: " << player->get_ability3() <<" ("<<player->get_spell3_cost()<<" mana)}" << endl;
         
             int attack_input;
             cin >> attack_input;
