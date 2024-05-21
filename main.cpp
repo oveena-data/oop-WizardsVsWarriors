@@ -378,10 +378,10 @@ int main(){
         sleep(3); //pause terminal for 3 seconds to allow player to read
         system("clear"); //clear terminal for tidiness
 
-        srand(time(0)); // reseeds the rand() function
-        int enemyChoice = rand() % 6;
+        srand(time(0)); // reseeds the rand() function so that new values are produced every game
+        int enemyChoice = rand() % 6; // Randomly produces a value between 0 and 5.
     
-        Player* opponent;
+        Player* opponent;   //Create opponent object
         if (enemyChoice == 0)
         {
             opponent = new Headhunter();
