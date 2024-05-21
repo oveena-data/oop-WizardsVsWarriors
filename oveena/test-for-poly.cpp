@@ -34,7 +34,7 @@ int main(){
         if (input_subclass == 1){
             cout << "Please enter a name: ";
             cin >> player_name;
-            player = new Hulk(player_name);
+            player = new Hulk(player_name); 
 
         } else if (input_subclass == 2){
             cout << "Please enter a name: ";
@@ -76,7 +76,7 @@ int main(){
     }
 
     // Ensure player was created successfully
-    if (player == NULL) {
+    if (player == NULL) { // refer to future segmentation errors
         cout << "Failed to create player. Exiting..." << endl;
         delete barb;
         return 1;
