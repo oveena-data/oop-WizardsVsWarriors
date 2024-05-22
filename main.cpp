@@ -1,6 +1,8 @@
 #include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
+#include <fstream>
+#include <list>
 
 #include "Player.h"
 #include "Warrior.h"
@@ -29,6 +31,10 @@ int main(){
     int input_class;
     int input_subclass;
     string player_name;
+    string listName;
+    string sclass;
+    list <string> names {};
+    list <string> subclass {};
 
     //Player *player = NULL;
 
@@ -62,18 +68,24 @@ int main(){
                 cout << "Please enter a name: ";
                 cin >> player_name;
                 player = new Hulk(player_name); //reassign player to hulk object
+                listName = player_name;
+                sclass = "Hulk";
                 valid = true;
 
             } else if (input_subclass == 2){
                 cout << "Please enter a name: ";
                 cin >> player_name;
                 player = new Barbarian(player_name); //reassign player to barbarian object
+                listName = player_name;
+                sclass = "Barbarian";
                 valid = true;
 
             } else if (input_subclass == 3){
                 cout << "Please enter a name: ";
                 cin >> player_name;
                 player = new Valkyrie(player_name); //reassign player to valkyrie object
+                listName = player_name;
+                sclass = "Valkyrie";
                 valid = true;
 
             } else {
@@ -87,6 +99,27 @@ int main(){
         if (player == NULL){
             cout << "Failed to create player. Terminating..." << endl;
             delete barb;
+            return 1;
+        }
+
+        int XP = 10; //Default XP value to be gained after every battle.
+
+        names.push_back(listName);
+        subclass.push_back(sclass);
+
+        //Open file and pull name and XP
+        ifstream infile("stats.txt");  //Opens the file stats.txt to retrieve data
+        if (infile.is_open()) {
+            infile >> player_name;  //Retrieve the name stored in stats.txt
+            infile >> XP;   //Retrieve the XP value stored in stats.txt
+
+            infile.close();  // Closes stats.txt
+            // Print name and XP
+            //cout << "Data read from stats.txt:" << endl;
+            //cout << "Name: " << player_name << endl;
+            cout << "XP: " << XP << endl;
+        } else {
+            cerr << "Unable to open file for reading." << endl;
             return 1;
         }
 
@@ -111,6 +144,8 @@ int main(){
             //opponent->print_attributes(); 
             headhunter->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Headhunter";
             cout << "You face a " << opponent->get_name() << " AC: "  << opponent->get_AC()<< endl;
             sleep(3);
         }   else if (enemyChoice == 1)
@@ -122,6 +157,8 @@ int main(){
             //opponent->print_attributes(); 
             oathbreaker->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Oathbreaker";
             cout << "You face a " << opponent->get_name()<< " AC: "  << opponent->get_AC() << endl;
             sleep(3);
         }   else if (enemyChoice == 2)
@@ -133,6 +170,8 @@ int main(){
             //opponent->print_attributes(); 
             assassin->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Assassin";
             cout << "You face a " << opponent->get_name()<< " AC: " << opponent->get_AC()<< endl;
             sleep(3);
         }   else if (enemyChoice == 3)
@@ -144,6 +183,8 @@ int main(){
             //opponent->print_attributes(); 
             cryomancer->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Cryomancer";
             cout << "You face a " << opponent->get_name() << " AC: " << opponent->get_AC()<< endl;
             sleep(3);
         } else if (enemyChoice == 4)
@@ -155,6 +196,8 @@ int main(){
             //opponent->print_attributes(); 
             blackmage->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "BlackMage";
             cout << "You face a " << opponent->get_name()<< " AC: "  << opponent->get_AC()<< endl;
             sleep(3);
         } else if (enemyChoice == 5)
@@ -166,9 +209,14 @@ int main(){
             //opponent->print_attributes(); 
             cultist->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Cultist";
             cout << "You face a " << opponent->get_name() << opponent->get_AC() << endl;
             sleep(3);
         }
+
+        names.push_back(listName);
+        subclass.push_back(sclass);
 
         //while both players have health above 0
         while(player->get_health() > 0 && opponent->get_health() > 0)
@@ -307,9 +355,28 @@ int main(){
                 }
 
                 if(player->get_health() <= 0){
-                    cout << opponent->get_name() << " wins!" << endl;
+                    cout << names.back() << " the " << subclass.back() << " has defeated " << names.front() << " the " << subclass.front() << "!" << endl;
                 } else if (opponent->get_health() <= 0){
-                    cout << player->get_name() << " wins!" << endl;
+                    cout << names.front() << " the " << subclass.front() << " has defeated " << names.back() << " the " << subclass.back() << "!" << endl;
+
+                    //Update XP stat
+                    XP = XP + 10;
+
+
+                    // Write data to stats.txt
+                    ofstream outfile("stats.txt"); //Opens stats.txt to send data to file
+                    if (outfile.is_open()) {
+
+                        //Overwrites values inside stats.txt
+                        outfile << player_name << endl;
+                        outfile << XP << endl;
+
+                        outfile.close(); // Close file
+                        cout << "Data saved to stats.txt." << endl;
+                    } else {
+                        cerr << "Unable to open file for writing." << endl;
+                        return 1;
+                    }
                 }
 
                 round++; //aggregates round number
@@ -354,16 +421,22 @@ int main(){
             cout << "Please enter a name: ";
             cin >> player_name;
             player = new FireWizard(player_name);
+            listName = player_name;
+            sclass = "FireWizard";
 
         } else if (input_subclass == 2){
             cout << "Please enter a name: ";
             cin >> player_name;
             player = new WaterWizard(player_name);
+            listName = player_name;
+            sclass = "WaterWizard";
 
         } else if (input_subclass == 3){
             cout << "Please enter a name: ";
             cin >> player_name;
             player = new AirWizard(player_name);
+            listName = player_name;
+            sclass = "AirWizard";
 
         } else {
          cout << "Invalid input! Please enter a subclass." << endl;
@@ -372,6 +445,27 @@ int main(){
         if (player == NULL){
             cout << "Failed to create player. Terminating..." << endl;
             delete barb;
+            return 1;
+        }
+
+        int XP = 10; //Default XP value to be gained after every battle.
+
+        names.push_back(listName);
+        subclass.push_back(sclass);
+
+        //Open file and pull name and XP
+        ifstream infile("stats.txt");  //Opens the file stats.txt to retrieve data
+        if (infile.is_open()) {
+            infile >> player_name;  //Retrieve the name stored in stats.txt
+            infile >> XP;   //Retrieve the XP value stored in stats.txt
+
+            infile.close();  // Closes stats.txt
+            // Print name and XP
+            cout << "Data read from stats.txt:" << endl;
+            cout << "Name: " << player_name << endl;
+            cout << "XP: " << XP << endl;
+        } else {
+            cerr << "Unable to open file for reading." << endl;
             return 1;
         }
 
@@ -398,6 +492,8 @@ int main(){
             //opponent->print_attributes(); 
             headhunter->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Headhunter";
             cout << "You face a " << opponent->get_name() << " AC: "  << opponent->get_AC()<< endl;
             sleep(3);
         }   else if (enemyChoice == 1)
@@ -409,6 +505,8 @@ int main(){
             //opponent->print_attributes(); 
             oathbreaker->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Oathbreaker";
             cout << "You face a " << opponent->get_name()<< " AC: "  << opponent->get_AC() << endl;
             sleep(3);
         }   else if (enemyChoice == 2)
@@ -420,6 +518,8 @@ int main(){
             //opponent->print_attributes(); 
             assassin->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Assassin";
             cout << "You face a " << opponent->get_name()<< " AC: " << opponent->get_AC()<< endl;
             sleep(3);
         }   else if (enemyChoice == 3)
@@ -431,6 +531,8 @@ int main(){
             //opponent->print_attributes(); 
             cryomancer->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Cryomancer";
             cout << "You face a " << opponent->get_name() << " AC: " << opponent->get_AC()<< endl;
             sleep(3);
         } else if (enemyChoice == 4)
@@ -442,6 +544,8 @@ int main(){
             //opponent->print_attributes(); 
             blackmage->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "BlackMage";
             cout << "You face a " << opponent->get_name()<< " AC: "  << opponent->get_AC()<< endl;
             sleep(3);
         } else if (enemyChoice == 5)
@@ -453,9 +557,14 @@ int main(){
             //opponent->print_attributes(); 
             cultist->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
+            listName = "your opponent";
+            sclass = "Cultist";
             cout << "You face a " << opponent->get_name() << opponent->get_AC() << endl;
             sleep(3);
         }
+
+        names.push_back(listName);
+        subclass.push_back(sclass);
 
         //while both players have health above 0
         while(player->get_health() > 0 && opponent->get_health() > 0)
@@ -608,9 +717,28 @@ int main(){
                 }
 
                 if(player->get_health() <= 0){
-                    cout << opponent->get_name() << " wins!" << endl;
+                    cout << names.back() << " the " << subclass.back() << " has defeated " << names.front() << " the " << subclass.front() << "!" << endl;
                 } else if (opponent->get_health() <= 0){
-                    cout << player->get_name() << " wins!" << endl;
+                    cout << names.front() << " the " << subclass.front() << " has defeated " << names.back() << " the " << subclass.back() << "!" << endl;
+
+                    //Update XP stat
+                    XP = XP + 10;
+
+
+                    // Write data to stats.txt
+                    ofstream outfile("stats.txt"); //Opens stats.txt to send data to file
+                    if (outfile.is_open()) {
+
+                        //Overwrites values inside stats.txt
+                        outfile << player_name << endl;
+                        outfile << XP << endl;
+
+                        outfile.close(); // Close file
+                        cout << "Data saved to stats.txt." << endl;
+                    } else {
+                        cerr << "Unable to open file for writing." << endl;
+                        return 1;
+                    }
                 }
 
                 round++; //aggregates round number
