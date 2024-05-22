@@ -111,14 +111,8 @@ void Player::set_health(int h){
 void Player::set_name(string n){
     this->name = n;
 }
-void Player::set_abilityCost1(int cost){
-    this->ability_cost1 = cost;
-}
-void Player::set_abilityCost2(int cost){
-    this->ability_cost2 = cost;
-}
-void Player::set_abilityCost3(int cost){
-    this->ability_cost3 = cost;
+void Player::set_abilityCost(int cost){
+    this->ability_cost = cost;
 }
 void Player::set_burnCounter(int c){
     this->burn_counter = c;
@@ -166,14 +160,8 @@ string Player::get_ability2(){
 string Player::get_ability3(){
     return ability_name3;
 }
-int Player::get_abilityCost1(){
-    return ability_cost1;
-}
-int Player::get_abilityCost2(){
-    return ability_cost2;
-}
-int Player::get_abilityCost3(){
-    return ability_cost3;
+int Player::get_abilityCost(){
+    return ability_cost;
 }
 int Player::get_burnCounter(){
     return burn_counter;

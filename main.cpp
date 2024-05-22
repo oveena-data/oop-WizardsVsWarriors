@@ -1,7 +1,6 @@
 #include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
-#include <fstream>
 
 #include "Player.h"
 #include "Warrior.h"
@@ -35,27 +34,6 @@ int main(){
 
     //initialise classes that use status effects
     Barbarian *barb = new Barbarian; 
-
-    int XP = 10; //Default XP value to be gained after every battle.
-
-    //Open file and pull name and XP
-    ifstream infile("stats.txt");  //Opens the file stats.txt to retrieve data
-    if (infile.is_open()) {
-        //infile >> player_name;  //Retrieve the name stored in stats.txt
-        infile >> XP;   //Retrieve the XP value stored in stats.txt
-
-        infile.close();  // Closes stats.txt
-        // Print name and XP
-        cout << "Data read from stats.txt:" << endl;
-        //cout << "Name: " << player_name << endl;
-        //cout << "XP from previous battles: " << XP << endl;
-    } else {
-        cerr << "Unable to open file for reading." << endl;
-        return 1;
-    }
-    cout << "XP from previous battles: " << XP << endl;
-
-    
 
     //prompt the player for the choice between warrior or wizard
     cout << "Do you want to be a Warrior or a Wizard?" << endl;
@@ -163,7 +141,7 @@ int main(){
             cryomancer->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
             cout << "You face a " << opponent->get_name() << endl;
-        }   else if (enemyChoice == 4)
+        } else if (enemyChoice == 4)
         {
             opponent = new BlackMage();
             BlackMage* blackmage = static_cast<BlackMage*> (opponent);
@@ -173,7 +151,7 @@ int main(){
             blackmage->set_subclass_attributes(); 
             //opponent->get_subclass_attributes();
             cout << "You face a " << opponent->get_name() << endl;
-        }   else if (enemyChoice == 5)
+        } else if (enemyChoice == 5)
         {
             opponent = new Cultist();
             Cultist* cultist = static_cast<Cultist*> (opponent);
@@ -197,9 +175,8 @@ int main(){
             cout << "Which action would you like to take?" << endl;
             cout << endl;
             //listing actions player can take
-            cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_abilityCost1()<< " stamina)}"<< endl;
-            cout << "{3: " << player->get_ability2() << " ("<<player->get_abilityCost2()<< " stamina)}" << endl;
-            cout << "{4: " << player->get_ability3() << " ("<<player->get_abilityCost3()<< " stamina)}" << endl;
+            cout << "{0: End Game Early} {1: Basic Attack (no stamina)} {2: " << player->get_ability1() << " ("<<player->get_abilityCost()<< " stamina)}"<< endl;
+            cout << "{3: " << player->get_ability2() <<player->get_ability2()<<" stamina)}" << endl;
 
             int attack_input;
             cin >> attack_input;
@@ -222,40 +199,16 @@ int main(){
 
                     case 2:
                     //warrior can only use special ability if they have enough stamina
-                    if (player->get_abilityCost1() > player->get_stamina()){
+                    if (player->get_abilityCost() > player->get_stamina()){
                         cout << "Not enough stamina! Resting..." << endl;
                         cout << endl;
                         player->set_stamina(player->get_stamina() + 25);
                         break; //***at this point this code forfeits the player's turn, i'm not sure how to fix this yet.***
                     } else {
-                        player->ability1(opponent, player->get_abilityCost1());
+                        player->ability1(opponent, player->get_abilityCost());
                         cout << endl;
                         break; 
-                    } 
-                    case 3:
-                    //warrior can only use special ability if they have enough stamina
-                    if (player->get_abilityCost2() > player->get_stamina()){
-                        cout << "Not enough stamina! Resting..." << endl;
-                        cout << endl;
-                        player->set_stamina(player->get_stamina() + 25);
-                        break; //***at this point this code forfeits the player's turn, i'm not sure how to fix this yet.***
-                    } else {
-                        player->ability2(opponent, player->get_abilityCost2());
-                        cout << endl;
-                        break; 
-                    } 
-                    case 4:
-                    //warrior can only use special ability if they have enough stamina
-                    if (player->get_abilityCost3() > player->get_stamina()){
-                        cout << "Not enough stamina! Resting..." << endl;
-                        cout << endl;
-                        player->set_stamina(player->get_stamina() + 25);
-                        break; //***at this point this code forfeits the player's turn, i'm not sure how to fix this yet.***
-                    } else {
-                        player->ability3(opponent, player->get_abilityCost3());
-                        cout << endl;
-                        break; 
-                    } 
+                    }  
                 } //switch statement end bracket
 
                 //if opponent is not out of health,
@@ -264,57 +217,35 @@ int main(){
 
                     if (opponent->get_staminaOrMana() == 1){ //if opponent uses stamina
                         //rolls a die to determine whether the opponent will use a basic attack or a special attack
-                        if (opponent->dice_roll() > 13)
-                        {
-                            srand(time(0)); // reseeds the rand() function
-                            int enemyAbility = rand() % 3;
-                            if((enemyAbility == 2) && (opponent->get_stamina() >= opponent->get_abilityCost3()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability3(player, opponent->get_abilityCost3());
-                            } else if((enemyAbility == 1) && (opponent->get_stamina() >= opponent->get_abilityCost2()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability2(player, opponent->get_abilityCost2());    
-                            } else if((enemyAbility == 0) && (opponent->get_stamina() >= opponent->get_abilityCost1()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability1(player, opponent->get_abilityCost1());
-                            } else 
-                            {
-                                opponent->basic_attack(player);
-                                opponent->set_stamina(opponent->get_stamina() + 15); 
-                            }
+                        if (opponent->dice_roll() > 13 && (opponent->get_stamina() >= opponent->get_abilityCost())){
+                            cout << "Opponent uses an ability attack!" << endl;
+                            opponent->ability1(player, opponent->get_abilityCost());
                         } else {
                             opponent->basic_attack(player);
                             opponent->set_stamina(opponent->get_stamina() + 15);
                         }
                     } else if (opponent->get_staminaOrMana() == 2){
                         //rolls a die to determine whether the opponent will use a basic attack or a special attack
-                        if (opponent->dice_roll() > 13)
-                        {
-                            //cout << "Opponent uses an ability attack!" << endl;
+                        if (opponent->dice_roll() > 13 && (opponent->get_mana() >= opponent->get_abilityCost())){
+                            cout << "Opponent uses an ability attack!" << endl;
                             srand(time(0)); // reseeds the rand() function
                             int enemyAbility = rand() % 3;
-                            //cout << enemyAbility << endl;
-                            if((enemyAbility == 2) && (opponent->get_mana() >= opponent->get_abilityCost3()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability3(player, opponent->get_abilityCost3());
-                            } else if((enemyAbility == 1) && (opponent->get_mana() >= opponent->get_abilityCost2()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability2(player, opponent->get_abilityCost2());    
-                            } else if((enemyAbility == 0) && (opponent->get_mana() >= opponent->get_abilityCost1()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability1(player, opponent->get_abilityCost1());
-                            } else 
-                            {
-                                opponent->basic_attack(player);
-                                opponent->set_stamina(opponent->get_mana() + 15); 
+                            cout << enemyAbility << endl;
+                            
+                            switch (enemyAbility){
+                                case 1:
+                                opponent->ability1(player, opponent->get_abilityCost());
+
+                                case 2:
+                                opponent->ability2(player, opponent->get_abilityCost());
+
+                                case 3:
+                                opponent->ability3(player, opponent->get_abilityCost());
+
+                                default:
+                                cout << "fix this";
+                                return 1;
                             }
-                         
                         } else {
                             opponent->basic_attack(player);
                             opponent->set_stamina(opponent->get_stamina() + 15);
@@ -447,10 +378,10 @@ int main(){
         sleep(3); //pause terminal for 3 seconds to allow player to read
         system("clear"); //clear terminal for tidiness
 
-        srand(time(0)); // reseeds the rand() function so that new values are produced every game
-        int enemyChoice = rand() % 6; // Randomly produces a value between 0 and 5.
+        srand(time(0)); // reseeds the rand() function
+        int enemyChoice = rand() % 6;
     
-        Player* opponent;   //Create opponent object
+        Player* opponent;
         if (enemyChoice == 0)
         {
             opponent = new Headhunter();
@@ -575,55 +506,34 @@ int main(){
 
                     if (opponent->get_staminaOrMana() == 1){ //if opponent uses stamina
                         //rolls a die to determine whether the opponent will use a basic attack or a special attack
-                        if (opponent->dice_roll() > 13)
-                        {
-                            srand(time(0)); // reseeds the rand() function
-                            int enemyAbility = rand() % 3;
-                            if((enemyAbility == 2) && (opponent->get_stamina() >= opponent->get_abilityCost3()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability3(player, opponent->get_abilityCost3());
-                            } else if((enemyAbility == 1) && (opponent->get_stamina() >= opponent->get_abilityCost2()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability2(player, opponent->get_abilityCost2());    
-                            } else if((enemyAbility == 0) && (opponent->get_stamina() >= opponent->get_abilityCost1()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability1(player, opponent->get_abilityCost1());
-                            } else 
-                            {
-                                opponent->basic_attack(player);
-                                opponent->set_stamina(opponent->get_stamina() + 15); 
-                            }
+                        if (opponent->dice_roll() > 13 && (opponent->get_stamina() >= opponent->get_abilityCost())){
+                            cout << "Opponent uses an ability attack!" << endl;
+                            opponent->ability1(player, opponent->get_abilityCost());
                         } else {
                             opponent->basic_attack(player);
                             opponent->set_stamina(opponent->get_stamina() + 15);
                         }
                     } else if (opponent->get_staminaOrMana() == 2){
                         //rolls a die to determine whether the opponent will use a basic attack or a special attack
-                        if (opponent->dice_roll() > 13)
-                        {
-                            //cout << "Opponent uses an ability attack!" << endl;
+                        if (opponent->dice_roll() > 13 && (opponent->get_mana() >= opponent->get_abilityCost())){
+                            cout << "Opponent uses an ability attack!" << endl;
                             srand(time(0)); // reseeds the rand() function
                             int enemyAbility = rand() % 3;
-                            //cout << enemyAbility << endl;
-                            if((enemyAbility == 2) && (opponent->get_mana() >= opponent->get_abilityCost3()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability3(player, opponent->get_abilityCost3());
-                            } else if((enemyAbility == 1) && (opponent->get_mana() >= opponent->get_abilityCost2()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability2(player, opponent->get_abilityCost2());    
-                            } else if((enemyAbility == 0) && (opponent->get_mana() >= opponent->get_abilityCost1()))
-                            {
-                                cout << "Opponent uses an ability attack!" << endl;
-                                opponent->ability1(player, opponent->get_abilityCost1());
-                            } else 
-                            {
-                                opponent->basic_attack(player);
-                                opponent->set_stamina(opponent->get_mana() + 15); 
+                            cout << enemyAbility << endl;
+                            
+                            switch (enemyAbility){
+                                case 1:
+                                opponent->ability1(player, opponent->get_abilityCost());
+
+                                case 2:
+                                opponent->ability2(player, opponent->get_abilityCost());
+
+                                case 3:
+                                opponent->ability3(player, opponent->get_abilityCost());
+
+                                default:
+                                cout << "fix this";
+                                return 1;
                             }
                         } else {
                             opponent->basic_attack(player);
