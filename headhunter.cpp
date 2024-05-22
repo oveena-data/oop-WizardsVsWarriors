@@ -24,11 +24,14 @@ Headhunter::Headhunter(string name){
     this->subclass = "Headhunter";
 
     this->ability_name1 = "Slice";
-    this->ability_cost = 20;
+    this->ability1_cost = 20;
+
     this->ability_name2 = "Savage Strike";
-    this->ability_cost = 30;
+    this->ability2_cost = 30;
+
     this->ability_name3 = "Frenzy";
-    this->ability_cost = 20;
+    this->ability3_cost = 20;
+
     this->frenzy_duration = 2;
     this->frenzy_counter = 0;
 }

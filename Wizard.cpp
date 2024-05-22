@@ -6,6 +6,7 @@
 using namespace std;
 
 Wizard::Wizard(){
+    this->staminaOrMana = 2;
 
 }
 

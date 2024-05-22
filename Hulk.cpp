@@ -22,11 +22,13 @@ Hulk::Hulk(string name){
 
     // this->stamina = 100; //stamina a meter from 0-100
     this->ability_name1 = "Hulk Smash";
-    this->ability_cost = 50;
+    this->ability1_cost = 50;
+
     this->ability_name2 = "Hulk Slap";
-    this->ability_cost = 30;
+    this->ability2_cost = 30;
+
     this->ability_name3 = "Hulk Rumble";
-    this->ability_cost = 30;
+    this->ability3_cost = 30;
 
     this->stun_duration = 1; //1 round
     this->smash_damage = 25;

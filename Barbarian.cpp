@@ -26,11 +26,14 @@ Barbarian::Barbarian(string name){
     this->subclass = "Barbarian";
 
     this->ability_name1 = "Burning Blades";
-    this->ability_cost = 30;
+    this-> ability1_cost = 30;
+
     this->ability_name2 = "Fury";
-    this->ability_cost = 20;
+    this->ability2_cost = 20;
+
     this->ability_name1 = "Whirlwind";
-    this->ability_cost = 40;
+    this->ability3_cost = 40;
+    
     this->burn_damage = 5;
     this->burn_duration = 2; //2 rounds
 

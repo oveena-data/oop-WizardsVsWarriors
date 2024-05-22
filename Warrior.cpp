@@ -7,6 +7,7 @@ Warrior::Warrior(){
  this->subclass = "Undefined";
  this->weapon = "Unarmed";
  this->stamina = 0;
+ this->staminaOrMana = 1;
 }
 
 Warrior::Warrior(string s){
@@ -36,4 +37,13 @@ int Warrior::get_stamina(){
 string stamina_or_mana(){
     return "stamina";
 }
+int Warrior::get_ability1_cost(){
+    return ability1_cost;
+}
+int Warrior::get_ability2_cost(){
+    return ability2_cost;
+}
 
+int Warrior::get_ability3_cost(){
+    return ability3_cost;
+}

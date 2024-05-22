@@ -13,7 +13,7 @@ Valkyrie::Valkyrie(string name){
     this->name = name;
     this->AC = 15;
     this->health = 60;
-    this->base_damage = 7;
+    this->base_damage = 9;
     //this->speed = 4;
     this->chance_to_hit = 3;
     this->stamina = 100;
@@ -24,8 +24,10 @@ Valkyrie::Valkyrie(string name){
     this->stun_counter = 0;
 
     this->ability_name1 = "Divine Smite";
+    this->ability1_cost = 35;
+
     this->ability_name2 = "Holy Armour";
-    this->ability_cost = 30;
+    this->ability2_cost = 20;
     this->smite_damage = 10;
     this->extra_armour = 3; //valkyrie can give herself extra armour using her second ability
 }

@@ -26,11 +26,14 @@ Assassin::Assassin(string name){
     this->subclass = "Assassin";
 
     this->ability_name1 = "Measured Cut";
-    this->ability_cost = 15;
+    this->ability1_cost = 15;
+
     this->ability_name2 = "Poison Stab";
-    this->ability_cost = 35;
+    this->ability2_cost = 35;
+
     this->ability_name3 = "Precision Strike";
-    this->ability_cost = 40;
+    this->ability3_cost = 40;
+
     //this->ability_name4 = "Smokescreen";
     this->ability_cost = 20;
     this->smokescreen_duration = 2;
