@@ -3,9 +3,9 @@
 
 ## Project Overview
 
-**Wizards vs Warriors** is a turn-based strategy game where arcane power collides with brute strength. Choose your path — master the mystical arts as a **Wizard** or wield steel and strategy as a **Warrior** — and engage in epic tactical battles.
+**Wizards vs Warriors** is a turn-based strategy game where arcane power collides with brute strength. You've gotta choose your path! Either master the mystical arts as a **Wizard** or wield steel and strategy as a **Warrior** to engage in epic tactical battles.
 
-This project leverages **Object-Oriented Programming (OOP)** principles to build a modular, expandable, and immersive gameplay experience. From class hierarchies to custom abilities, everything is structured for clean design and maximum fun.
+This project leverages **Object-Oriented Programming (OOP)** principles to build a modular, expandable, and immersive gameplay experience. 
 
 ---
 
@@ -13,7 +13,7 @@ This project leverages **Object-Oriented Programming (OOP)** principles to build
 
 - ✨ **Two Unique Classes**: Play as a **Wizard** or **Warrior**, each with distinct abilities, subclasses, and playstyles.
 - 🛡️ **Strategic Turn-Based Combat**: Outsmart your opponent using terrain, abilities, and timing.
-- 🎨 **Pixel-Art UI & Animations**: Retro-style visuals for a charming, game-like experience.
+- 🎨 **Pixel-Art UI & Animations**: Retro-style visuals for a charming, game-like experience. (WIP)
 - 🧙‍♀️ **Character Creation & Progression**: Create your hero, gain XP, and level up your skills.
 - 💡 **Interactive Help System**: Stuck? Use the in-game `help` function for tips and guidance.
 - ⚔️ **Battle Animations & Effects**: Dynamic feedback for attacks, damage, and critical hits.
@@ -23,7 +23,7 @@ This project leverages **Object-Oriented Programming (OOP)** principles to build
 ## Project Goals
 
 1. Build a robust, immersive battle engine using clean OOP practices.
-2. Create **diverse and balanced classes** with customizable abilities.
+2. Create **diverse and balanced classes** with customisable abilities.
 3. Design an **intuitive UI** with clear icons, tooltips, and prompts.
 4. Implement a **gamified progression system** with XP and achievements.
 5. Use **pixel art** and animations to enhance player experience.
